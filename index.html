@@ -192,13 +192,13 @@ var ALT_ABBR = {JAC:'JAX',WSH:'WAS',LA:'LAR',LVR:'LV',OAK:'LV',SD:'LAC',STL:'LAR
 var POS_LIST = ['QB','RB','WR','TE','OL','DL','EDGE','LB','CB','S','K','P'];
 var POS_MAP = {QB:'QB',RB:'RB',HB:'RB',FB:'RB',WR:'WR',TE:'TE',OL:'OL',OT:'OL',T:'OL',LT:'OL',RT:'OL',OG:'OL',G:'OL',LG:'OL',RG:'OL',C:'OL',IOL:'OL',OC:'OL',LS:'OL',
   DL:'DL',DT:'DL',NT:'DL',IDL:'DL',DE:'EDGE',EDGE:'EDGE',ED:'EDGE',RUSH:'EDGE',LB:'LB',ILB:'LB',MLB:'LB',OLB:'LB',WLB:'LB',SLB:'LB',
-  CB:'CB',DB:'CB',NB:'CB',S:'S',FS:'S',SS:'S',SAF:'S',K:'K',PK:'K',P:'P'};
+  CB:'CB',DB:'CB',NB:'CB',S:'S',FS:'S',SS:'S',SAF:'S',K:'K',PK:'K',P:'P',ST:'K',KP:'K','K/P':'K',SPEC:'K',SPT:'K'};
 var SLOTS = {QB:1,RB:1,WR:3,TE:1,OL:5,DL:2,EDGE:2,LB:3,CB:3,S:2,K:1,P:1};
 var SIDE = {QB:'off',RB:'off',WR:'off',TE:'off',OL:'off',K:'off',DL:'def',EDGE:'def',LB:'def',CB:'def',S:'def',P:'def'};
 var WEIGHT = {QB:.30,RB:.05,WR:.07,TE:.05,OL:.05,K:.03,DL:.06,EDGE:.07,LB:.05,CB:.07,S:.05,P:.02};
 var PEAK = {QB:29,RB:26,WR:27,TE:28,OL:28,DL:28,EDGE:27,LB:27,CB:27,S:28,K:31,P:31};
 var RETIRE_AGE = {QB:37,RB:31,WR:33,TE:33,OL:34,DL:33,EDGE:33,LB:33,CB:32,S:33,K:39,P:39};
-var DEV = [{k:'X-Factor',p:.07,b:9},{k:'Star',p:.18,b:4},{k:'Normal',p:.58,b:0},{k:'Slow',p:.17,b:-5}];
+var DEV = [{k:'X-Factor',p:.06,b:12},{k:'Star',p:.16,b:7},{k:'Normal',p:.50,b:0},{k:'Slow',p:.17,b:-4},{k:'Bust',p:.11,b:0}];
 
 /* ---------- state ---------- */
 var S = null;
@@ -344,11 +344,48 @@ function normalizeCollegeRatings(rows){
   });
 }
 function projectNFL(col, round, pos){
-  var adj = {QB:-2,K:3,P:3,OL:-1}[pos]||0;
-  var ovr = 30 + col*0.47 + (round===1?2.5:0) + adj + N(0,3.5);
-  return Math.round(clamp(ovr,45,84));
+  // College rating drives the starting NFL rating: 60 → ~52, 70 → ~59, 80 → ~66, 90 → ~73, 99 → ~79
+  var adj = {QB:-1,K:2,P:2}[pos]||0;
+  var ovr = 9 + col*0.71 + adj + N(0,1.8);
+  return Math.round(clamp(ovr,42,85));
 }
 function rollDev(){ var r=rnd(),c=0; for(var i=0;i<DEV.length;i++){ c+=DEV[i].p; if(r<c) return DEV[i]; } return DEV[2]; }
+
+/* ---------- college towns → schools ---------- */
+var COLLEGE_TOWNS = {
+ 'austin':'Texas','tallahassee':'Florida State','tuscaloosa':'Alabama','athens':'Georgia','athens ga':'Georgia','athens oh':'Ohio','columbus':'Ohio State','ann arbor':'Michigan','baton rouge':'LSU','eugene':'Oregon',
+ 'los angeles':'USC','westwood':'UCLA','state college':'Penn State','university park':'Penn State','clemson':'Clemson','south bend':'Notre Dame','coral gables':'Miami','miami':'Miami','miami fl':'Miami','oxford oh':'Miami (OH)',
+ 'knoxville':'Tennessee','oxford':'Ole Miss','oxford ms':'Ole Miss','seattle':'Washington','salt lake city':'Utah','iowa city':'Iowa','norman':'Oklahoma','college station':'Texas A&M','madison':'Wisconsin','auburn':'Auburn',
+ 'boulder':'Colorado','columbia':'South Carolina','columbia sc':'South Carolina','columbia mo':'Missouri','gainesville':'Florida','tempe':'Arizona State','tucson':'Arizona','manhattan':'Kansas State','manhattan ks':'Kansas State','lawrence':'Kansas',
+ 'fort worth':'TCU','waco':'Baylor','chapel hill':'North Carolina','raleigh':'NC State','louisville':'Louisville','lexington':'Kentucky','lexington va':'VMI','minneapolis':'Minnesota','lincoln':'Nebraska','boise':'Boise State',
+ 'new orleans':'Tulane','ames':'Iowa State','stillwater':'Oklahoma State','blacksburg':'Virginia Tech','pittsburgh':'Pittsburgh','dallas':'SMU','university park tx':'SMU','durham':'Duke','fayetteville':'Arkansas','fayetteville ar':'Arkansas',
+ 'starkville':'Mississippi State','champaign':'Illinois','urbana':'Illinois','urbana-champaign':'Illinois','west lafayette':'Purdue','toledo':'Toledo','east lansing':'Michigan State','bloomington':'Indiana','evanston':'Northwestern','piscataway':'Rutgers','new brunswick':'Rutgers',
+ 'college park':'Maryland','charlottesville':'Virginia','winston-salem':'Wake Forest','winston salem':'Wake Forest','atlanta':'Georgia Tech','syracuse':'Syracuse','chestnut hill':'Boston College','boston':'Boston College','provo':'BYU','palo alto':'Stanford','stanford':'Stanford',
+ 'berkeley':'California','corvallis':'Oregon State','pullman':'Washington State','lubbock':'Texas Tech','houston':'Houston','cincinnati':'Cincinnati','orlando':'UCF','morgantown':'West Virginia','nashville':'Vanderbilt','annapolis':'Navy','west point':'Army',
+ 'colorado springs':'Air Force','memphis':'Memphis','tampa':'South Florida','boca raton':'Florida Atlantic','miami gardens':'FIU','hattiesburg':'Southern Miss','ruston':'Louisiana Tech','lafayette':'Louisiana','lafayette la':'Louisiana','monroe':'ULM','mobile':'South Alabama',
+ 'troy':'Troy','boone':'Appalachian State','greenville':'East Carolina','charlotte':'Charlotte','conway':'Coastal Carolina','statesboro':'Georgia Southern','kalamazoo':'Western Michigan','mount pleasant':'Central Michigan','mt pleasant':'Central Michigan','ypsilanti':'Eastern Michigan',
+ 'muncie':'Ball State','dekalb':'Northern Illinois','bowling green':'Bowling Green','bowling green oh':'Bowling Green','bowling green ky':'Western Kentucky','kent':'Kent State','akron':'Akron','buffalo':'Buffalo','fresno':'Fresno State','san diego':'San Diego State',
+ 'san jose':'San Jose State','las vegas':'UNLV','reno':'Nevada','laramie':'Wyoming','fort collins':'Colorado State','albuquerque':'New Mexico','las cruces':'New Mexico State','logan':'Utah State','honolulu':'Hawaii','manoa':'Hawaii',
+ 'el paso':'UTEP','san antonio':'UTSA','denton':'North Texas','huntington':'Marshall','murfreesboro':'Middle Tennessee','birmingham':'UAB','tulsa':'Tulsa','jonesboro':'Arkansas State','san marcos':'Texas State','norfolk':'Old Dominion',
+ 'harrisonburg':'James Madison','huntsville tx':'Sam Houston','philadelphia':'Temple','storrs':'UConn','amherst':'UMass','jacksonville':'Jacksonville State','jacksonville al':'Jacksonville State','kennesaw':'Kennesaw State','tallahassee fl':'Florida State','austin tx':'Texas',
+ 'fargo':'North Dakota State','brookings':'South Dakota State','missoula':'Montana','bozeman':'Montana State','cheney':'Eastern Washington','spartanburg':'Wofford','baton rouge la':'LSU','gainesville fl':'Florida','columbus oh':'Ohio State','berkeley ca':'California'
+};
+var STATE_ABBR = {alabama:'al',arizona:'az',arkansas:'ar',california:'ca',colorado:'co',connecticut:'ct',florida:'fl',georgia:'ga',hawaii:'hi',idaho:'id',illinois:'il',indiana:'in',iowa:'ia',kansas:'ks',kentucky:'ky',louisiana:'la',maryland:'md',massachusetts:'ma',michigan:'mi',minnesota:'mn',mississippi:'ms',missouri:'mo',montana:'mt',nebraska:'ne',nevada:'nv','new mexico':'nm','new york':'ny','north carolina':'nc','north dakota':'nd',ohio:'oh',oklahoma:'ok',oregon:'or',pennsylvania:'pa','south carolina':'sc','south dakota':'sd',tennessee:'tn',texas:'tx',utah:'ut',virginia:'va',washington:'wa','west virginia':'wv',wisconsin:'wi',wyoming:'wy'};
+function collegeFromTown(raw){
+  if(!raw) return raw;
+  var s = String(raw).trim(), k = s.toLowerCase().replace(/\./g,'').replace(/\s+/g,' ');
+  if(COLLEGE_TOWNS[k]) return COLLEGE_TOWNS[k];
+  // "City, State" / "City, ST" / "City ST"
+  var m = k.match(/^(.+?)[,\s]+([a-z ]+)$/);
+  if(m){
+    var st = STATE_ABBR[m[2].trim()] || (m[2].trim().length===2 ? m[2].trim() : null);
+    if(st && COLLEGE_TOWNS[m[1]+' '+st]) return COLLEGE_TOWNS[m[1]+' '+st];
+    if(st && COLLEGE_TOWNS[m[1]]) return COLLEGE_TOWNS[m[1]];
+  }
+  var noComma = k.split(',')[0].trim();
+  if(COLLEGE_TOWNS[noComma] && k.indexOf(',')>0) return COLLEGE_TOWNS[noComma];
+  return s;
+}
 
 /* ---------- import parsing ---------- */
 function splitRow(line, d){
@@ -450,8 +487,14 @@ function parseDraftText(text){
     var rd = parseInt(String(r.round||'').replace(/[^0-9]/g,''),10);
     var tid = matchTeam(r.team, lk);
     if(r.team && tid==null) errors.push(name+': team "'+r.team+'" not recognized — the draft decides his team.');
-    out.push({name:name, posRaw:posRaw||pos, pos:pos, college:r.college?String(r.college).trim():'', ratingRaw:r.rating, pick:isNaN(pk)?null:pk, round:isNaN(rd)?null:rd, teamId:tid, age:r.age?parseInt(r.age,10):null});
+    out.push({name:name, posRaw:posRaw||pos, pos:pos, college:r.college?collegeFromTown(r.college):'', collegeRaw:r.college?String(r.college).trim():'', ratingRaw:r.rating, pick:isNaN(pk)?null:pk, round:isNaN(rd)?null:rd, teamId:tid, age:r.age?parseInt(r.age,10):null});
   });
+  // ST = special teams: split between kicker and punter (editable in the preview)
+  var stRows = out.filter(function(r){ return /^(ST|KP|K\/P|SPEC|SPT)$/.test(r.posRaw); });
+  stRows.forEach(function(r,i){ r.pos = i%2===0 ? 'K' : 'P'; });
+  if(stRows.length) errors.push(stRows.length+' ST (special teams) player'+(stRows.length>1?'s were':' was')+' set to '+(stRows.length>1?'kicker and punter in turn':'kicker')+' — switch K/P in the preview if needed.');
+  var townFix = out.filter(function(r){ return r.collegeRaw && r.college!==r.collegeRaw; }).length;
+  if(townFix) errors.push(townFix+' college'+(townFix>1?'s were':' was')+' listed as a city and changed to the school (e.g. Austin → Texas). The original is shown in brackets.');
   // if picks look like "pick within round" (repeats), convert to overall
   var seen={}, dup=false; out.forEach(function(r){ if(r.pick!=null){ if(seen[r.pick]) dup=true; seen[r.pick]=1; } });
   if(dup){ out.forEach(function(r){ if(r.round && r.pick!=null) r.pick = (r.round-1)*32 + r.pick; }); }
@@ -489,9 +532,11 @@ function commitDraft(rows){
     var dev = rollDev();
     var age = r.age && r.age>18 && r.age<30 ? r.age : (rnd()<.6?22:(rnd()<.6?21:23));
     var ovr = clamp(Math.round(r.nfl),40,99);
-    var head = clamp((99-ovr)/28, 0.15, 1.2);
-    var growth = (Math.max(0, N(7,4.5)) + dev.b + (age<=21?2:0)) * head;
-    var pot = clamp(Math.round(ovr + growth), ovr, 99);
+    // Ceiling is hidden and only loosely tied to draft slot: late-rounders can blossom, early picks can bust
+    var head = clamp((99-ovr)/26, 0.2, 1.25);
+    var pot;
+    if(dev.k==='Bust') pot = ovr - ri(0,4);
+    else pot = clamp(Math.round(ovr + (Math.max(0, N(6,4)) + dev.b + (age<=21?2:0)) * head), ovr, 99);
     var contract = Y + (r.round===1?4:3) - 1;
     S.players.push({
       id:S.nextId++, name:r.name, pos:r.pos, posRaw:r.posRaw, college:r.college, col:Math.round(r.col), draftYear:Y, round:r.round, pick:r.pick,
@@ -733,13 +778,13 @@ function offseason(season){
       var t = ri(0,31); p.teamId=t; p.contractEnd=Y+ri(1,2); season.moves.push({id:p.id,txt:p.name+' signs with '+teamById(t).abbr+' (free agent)'}); p.log.push((Y+1)+': Signed with '+teamById(t).abbr);
     }
     var peak = PEAK[p.pos], age = p.age, delta;
-    if(age < peak){ delta = p.pot>p.ovr ? (p.pot-p.ovr)*U(.15,.4) + N(.3,1.5) : N(-.3,1.2); }
+    if(age < peak){ delta = p.pot>p.ovr ? (p.pot-p.ovr)*U(.15,.4) + N(.3,1.5) : (p.dev==='Bust' ? N(-1.2,1.6) : N(-.3,1.2)); }
     else if(age <= peak+2){ delta = N(0,1.6); }
     else { delta = -(age-peak-2)*U(.8,1.6) - U(0,1.5) + N(0,1.2); }
     if(s && s.gp>=12 && s.score >= prodBar(p.pos)) delta += .5;
     if(s && s.gp<=8 && age>=28) delta -= U(0,2);
     var r = rnd();
-    if(age<27 && r<.04){ var bo=U(4,7); delta += bo; p.pot = Math.min(99, p.pot + Math.round(bo/2)); p.log.push(Y+': Breakout offseason'); }
+    if(age<27 && r<(p.ovr<70?.06:.035)){ var bo=U(4,7); delta += bo; p.pot = Math.min(99, p.pot + Math.round(bo/2)); p.log.push(Y+': Breakout offseason'); }
     else if(r>.975){ delta -= U(3,7); }
     p.ovr = Math.round(clamp(p.ovr + delta, 40, 99));
     if(p.pot < p.ovr) p.pot = p.ovr;
@@ -794,7 +839,7 @@ function lastDelta(p){ var r=p.ratings; if(r.length<2) return null; return r[r.l
 function recStr(r){ return r.w+'-'+r.l+(r.t?'-'+r.t:''); }
 function seasonOf(y){ return S.seasons.filter(function(s){return s.year===y;})[0]; }
 function lastSeason(){ return S.seasons[S.seasons.length-1]; }
-function devBadge(p){ if(!p.devKnown) return '<span class="badge" title="Revealed after first season">Dev ?</span>'; var c={'X-Factor':'gold','Star':'green','Normal':'','Slow':'red'}[p.dev]; return '<span class="badge '+c+'">'+p.dev+'</span>'; }
+function devBadge(p){ if(!p.devKnown) return '<span class="badge" title="Revealed after first season">Dev ?</span>'; var c={'X-Factor':'gold','Star':'green','Normal':'','Slow':'','Bust':'red'}[p.dev]; return '<span class="badge '+c+'">'+p.dev+'</span>'; }
 
 function sortable(id, cols, rows, defSort){
   var st = UI.sort[id] || defSort || {k:null,dir:-1};
@@ -1026,7 +1071,7 @@ function renderDraft(){
         '<td><select class="mini" data-pv="team" data-i="'+i+'">'+teamOpts.map(function(t){return '<option value="'+t.id+'"'+(t.id===r.teamId?' selected':'')+'>'+t.abbr+'</option>';}).join('')+'</select></td>'+
         '<td>'+esc(r.name)+(r.gen?' <span class="badge">Gen</span>':' <span class="badge blue">Yours</span>')+'</td>'+
         '<td><select class="mini" data-pv="pos" data-i="'+i+'">'+POS_LIST.map(function(p){return '<option'+(p===r.pos?' selected':'')+'>'+p+'</option>';}).join('')+'</select>'+(r.posRaw&&r.posRaw!==r.pos?' <span class="muted small">'+esc(r.posRaw)+'</span>':'')+'</td>'+
-        '<td>'+esc(r.college)+'</td><td class="n">'+(r.colMissing?'<span class="muted">—</span>':Math.round(r.col))+'</td>'+
+        '<td>'+esc(r.college)+(r.collegeRaw && r.collegeRaw!==r.college?' <span class="muted small">('+esc(r.collegeRaw)+')</span>':'')+'</td><td class="n">'+(r.colMissing?'<span class="muted">—</span>':Math.round(r.col))+'</td>'+
         '<td class="n"><input class="mini" type="number" min="40" max="99" data-pv="nfl" data-i="'+i+'" value="'+r.nfl+'"></td></tr>';
     });
     h += '</tbody></table></div></div>';
@@ -1106,7 +1151,7 @@ function renderPlayers(){
     {k:'team',l:'Team',f:function(p){return p.retired?'<span class="muted">—</span>':tLink(p.teamId);},sv:function(p){return tAbbr(p.teamId);}},
     {k:'draft',l:'Drafted',f:function(p){return p.draftYear+' R'+p.round+' #'+p.pick+' '+tAbbr(p.draftTeamId);},sv:function(p){return p.draftYear*1000+p.pick;}},
     {k:'col',l:'College rtg',n:1},
-    {k:'dev',l:'Dev',f:devBadge,sv:function(p){return p.devKnown?({'X-Factor':4,'Star':3,'Normal':2,'Slow':1}[p.dev]):0;}},
+    {k:'dev',l:'Dev',f:devBadge,sv:function(p){return p.devKnown?({'X-Factor':5,'Star':4,'Normal':3,'Slow':2,'Bust':1}[p.dev]):0;}},
     {k:'rookie',l:'Rookie',n:1,f:function(p){return ovrBadge(p.ratings[0].ovr);},sv:function(p){return p.ratings[0].ovr;},title:'Projected NFL rating when drafted'}
   ];
   showYears.forEach(function(y){ cols.push({k:'r'+y,l:'After '+y,n:1,title:'Rating at the end of the '+y+' season',f:function(p){ var r=ratingAfter(p,y); return r!=null?ovrBadge(r):'<span class="muted">·</span>'; },sv:function(p){return ratingAfter(p,y);}}); });
@@ -1264,7 +1309,7 @@ function renderFile(){
     '<h3>Load a backup</h3><textarea id="loadText" placeholder="Paste a backup here" style="min-height:100px"></textarea><div class="row" style="margin-top:8px"><button class="btn" data-act="loadsave">Load pasted backup</button><input type="file" id="loadFile" accept=".json,.txt"></div></div>'+
     '<div class="card"><h2>Start over</h2><p class="muted">Wipes every season, player and stat.</p><div class="row"><label>First draft year <input type="number" id="startYear" value="'+(new Date().getFullYear()+1)+'" style="width:100px"></label><button class="btn danger" data-act="askreset">Start a new league</button></div><div id="resetConfirm"></div>'+
     '<h3>How the sim works</h3><ul class="list small muted">'+
-    '<li><b>Rating conversion:</b> NFL OVR ≈ 30 + 0.47 × college rating, +2.5 for first-rounders, with a little randomness. A 95 college player projects around 75.</li>'+
+    '<li><b>Rating conversion:</b> the college rating sets the starting NFL rating: about 9 + 0.71 × college rating, with only a little randomness (college 70 → ~59, 80 → ~66, 90 → ~73, 99 → ~79).</li><li><b>Booms and busts:</b> each player has a hidden ceiling and dev trait (X-Factor 6%, Star 16%, Normal 50%, Slow 17%, Bust 11%) that ignores draft slot, so late-round sleepers can pass first-round picks and some top picks flop.</li>'+
     '<li><b>Development:</b> each player has a hidden ceiling and dev trait (X-Factor, Star, Normal, Slow), revealed after year one. Players grow until their position\'s peak age, hold for a couple of years, then decline.</li>'+
     '<li><b>Playing time:</b> each team has unnamed veterans at every position. Your player starts only if he\'s better than them.</li>'+
     '<li><b>Team strength:</b> each team has offense and defense ratings that drift each year; your starters raise or lower them (a QB matters most).</li>'+
@@ -1548,6 +1593,7 @@ function photoCapable(){
 }
 var PHOTO_PROMPT = 'These images show an American football draft class or prospect list (screenshots, photos of a screen, or a printed/handwritten list). Extract every player you can read.\n\n'+
   'Reply with ONLY a JSON array. Each element: {"name": string, "position": string (as written, e.g. QB, WR, EDGE, OT, CB), "college": string or null, "rating": number or string or null (the player\'s overall rating or grade if shown; if several ratings appear use the overall one; keep letter grades like "A-" as strings), "pick": number or null (overall pick number if shown), "round": number or null, "team": string or null (NFL team if shown), "age": number or null}.\n\n'+
+  'If a school is given as a city or town (for example Austin or Tallahassee), write the university it means (Texas, Florida State). Positions written as ST mean a kicker or punter: write "K" for a kicker, "P" for a punter, or "ST" if you cannot tell.\n\n'+
   'Do not invent players or numbers — use null when something is not shown. Keep the order they appear. Example: [{"name":"Jalen Whitfield","position":"QB","college":"Ohio State","rating":96,"pick":null,"round":null,"team":null,"age":null}]';
 function readPhotos(files){
   files = Array.prototype.slice.call(files||[]).filter(function(f){ return /^image\//.test(f.type); });
