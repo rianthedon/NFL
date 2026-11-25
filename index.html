@@ -183,6 +183,17 @@ table.aw tr.aw-sub td{background:var(--panel2);color:var(--muted);font-size:11px
 .moodbar{flex:1;max-width:280px;height:8px;border-radius:5px;background:var(--panel2);overflow:hidden}.moodbar>div{height:100%}
 .moodbar .m5{background:#2fd68a}.moodbar .m4{background:#7fd6a8}.moodbar .m3{background:#8a97b0}.moodbar .m2{background:#e89a3c}.moodbar .m1{background:#e5485f}
 .moodf{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:8px;font-size:12px}.moodf .up{color:var(--good)}.moodf .down{color:var(--bad)}
+.gamelogtbl td,.gamelogtbl th{padding:5px 8px;font-size:12.5px}
+.gamelogtbl tr.glbye td,.gamelogtbl tr.glout td{font-style:italic}
+.gamelogtbl tr.gltot td{border-top:2px solid var(--line);background:var(--panel2)}
+.pill{font:inherit;font-size:12px;font-weight:700;border:1px solid var(--line);background:var(--panel2);color:var(--muted);border-radius:999px;padding:3px 11px;cursor:pointer}.pill.on{background:var(--accent);border-color:var(--accent);color:#111}
+.gl-res{font:inherit;font-weight:700;font-size:12px;border:1px solid var(--line);background:var(--panel2);color:inherit;border-radius:6px;padding:1px 7px;cursor:pointer}
+.glfp{color:var(--accent)}
+.gl-res.w{color:var(--good)}.gl-res.l{color:var(--bad)}
+.mvgrid{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;margin-top:6px}
+.mvblock{min-width:0;overflow-x:auto}.mvblock table{width:100%}
+.mvblock h4{margin:6px 0 6px;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--mid)}
+.mvblock table td,.mvblock table th{padding:5px 7px;font-size:12.5px}
 .badge.arch{background:#1d2a45;border-color:#33507f;color:#b9d2ff}
 .badge.lvl1{color:#ff9aa9;border-color:#7a2533}.badge.lvl2{color:#c9d3e6}.badge.lvl3{color:#9cc7ff;border-color:#24508f}.badge.lvl4{color:#5ff0aa;border-color:#1c6a4a}.badge.lvl5{color:#ffd36b;border-color:#7a5a12;background:#3a2c08}
 .attrs{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px 18px}
@@ -366,25 +377,36 @@ table.mini tr.lead1 td{font-weight:700}
 .lineup{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:14px;align-items:start}
 .depthwrap{overflow-x:auto}
 .fields{display:flex;flex-direction:column;gap:10px}
-.field{position:relative;height:300px;border-radius:12px;overflow:hidden;background:repeating-linear-gradient(180deg,#2f6b3a 0,#2f6b3a 30px,#2a6234 30px,#2a6234 60px);border:2px solid #e5e7eb33;box-shadow:inset 0 0 40px rgba(0,0,0,.35)}
-.field .yl{position:absolute;left:0;right:0;height:1px;background:rgba(255,255,255,.18)}
+.field{position:relative;height:380px;border-radius:12px;overflow:hidden;background:repeating-linear-gradient(180deg,#2d6a3a 0,#2d6a3a 34px,#2a6436 34px,#2a6436 68px);border:2px solid #e5e7eb33;box-shadow:inset 0 0 40px rgba(0,0,0,.35)}
+.field .yl{position:absolute;left:0;right:0;height:1px;background:rgba(255,255,255,.09)}
 .field .los{position:absolute;left:0;right:0;height:3px;background:#60a5fa;opacity:.8}
 .field.off .los{top:19%}.field.def .los{top:87%}
 .flabel{position:absolute;left:10px;top:6px;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#fff;opacity:.85;z-index:2}
 .field.def .flabel{top:auto;bottom:6px}
 .fchip{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:1px;cursor:pointer;z-index:1;width:60px}
 .fchip:hover{z-index:3}.fchip:hover .hs{outline:2px solid var(--accent)}
-.fchip .fname{font-size:11px;font-weight:700;color:#fff;text-shadow:0 1px 2px #000;white-space:nowrap;max-width:60px;overflow:hidden;text-overflow:ellipsis}
-.fchip .frow{display:flex;gap:3px;align-items:center;font-size:10px}
-.fchip .fpos{font-size:10px;font-weight:700;color:#e5e7eb;background:rgba(0,0,0,.45);padding:0 4px;border-radius:4px}
-.fchip .ovr,.fchip .badge{font-size:10px;padding:0 4px;min-width:0}
+
+
+
+
 .fchip.empty{opacity:.6}
+
 .stline{font-size:13px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 table.depth{table-layout:fixed;width:100%}table.depth td,table.depth th{padding:4px 5px;font-size:12px;vertical-align:top;overflow:hidden;text-overflow:ellipsis}table.depth th:first-child{width:58px}table.depth .dname{display:inline-block;max-width:calc(100% - 30px);overflow:hidden;text-overflow:ellipsis;vertical-align:bottom}
 table.depth td.st{background:rgba(245,184,61,.06)}
 table.depth .dpos{font-weight:700;white-space:nowrap}
 table.depth .dname{white-space:nowrap}table.depth .dpos .small{font-size:10px}
-@media (max-width:900px){ .lineup{grid-template-columns:1fr} .fchip{width:58px} .fchip .hs{width:30px!important;height:30px!important} }
+@media (max-width:900px){ .lineup{grid-template-columns:1fr} }
+.fchip{width:auto}
+.fchip .hs{width:42px!important;height:42px!important;border:2px solid rgba(255,255,255,.85);box-shadow:0 2px 6px rgba(0,0,0,.45);position:relative;z-index:1;margin-bottom:1px}
+.fchip .fcard{background:none;border:0;padding:0;min-width:52px;max-width:90px;text-align:center;text-shadow:0 1px 2px rgba(0,0,0,.95),0 0 6px rgba(0,0,0,.6)}
+.fchip .fname{font-size:11px;font-weight:700;color:#f8fafc;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:12px}
+.fchip .fmeta{display:flex;justify-content:center;align-items:center;gap:4px;margin-top:2px;font-size:9.5px;line-height:13px;white-space:nowrap}
+.fchip .fpos{font-weight:800;color:var(--accent);letter-spacing:.03em}
+.fchip .ovr{font-size:9.5px;padding:0 3px;min-width:0;line-height:13px;text-shadow:none}
+.fchip .fage{color:#e2e8f0;font-weight:600}
+.fchip .fmeta>*{flex-shrink:0}
+.fchip:hover .fname{color:var(--accent)}
 tr.champrow td{background:rgba(245,184,61,.1)}
 .hofcard.plain{background:var(--panel2);border-color:var(--line)}
 </style>
@@ -619,6 +641,21 @@ function makeDepthPlayer(t, pos, starter, used){
   S.players.push(p); PIDX[p.id]=p; ensureIdentity(p); return p;
 }
 // Before every season: cut rosters down to size and fill empty spots (free agents first, then new depth players).
+// a team with too many good players at one spot trades the extra one for a late pick instead of cutting him
+function surplusTrade(p, t, Y){
+  var season = S.seasons[S.seasons.length-1]; if(!season) return false;
+  var MR = maxDraftRound();
+  var need = S.teams.filter(function(o){ if(o.id===t.id) return false; var c = rosterOf(o.id).filter(function(q){ return q.pos===p.pos; }); return c.length < (ROSTER[p.pos]||2)+1 && capSpace(o.id, Y) >= (p.salary||0); })
+    .sort(function(a,b){ return upgradeFor(b.id, p) - upgradeFor(a.id, p); });
+  if(!need.length) return false;
+  var bid = need[0].id, rd = p.ovr>=85 ? Math.min(MR,4) : Math.min(MR, p.ovr>=80 ? 5 : 6), o = findPick(bid, Y, rd) ; if(o==null) o = findPick(bid, Y+1, rd);
+  if(o==null) return false;
+  var k = {y: pickOwner(Y, rd, o)===bid ? Y : Y+1, rd:rd, orig:o}; movePick(k.y, k.rd, k.orig, t.id);
+  p.teamId = bid; p._tradedY = Y; moodFreshStart(p, false);
+  var tr = recordTrade(season, t.id, bid, {players:[], picks:[k]}, {players:[p.id], picks:[]}, 'player', 'surplus depth');
+  tradeTx(p, Y, 'Traded from '+t.abbr+' to '+teamById(bid).abbr+' for '+pickTxt(k, bid)+' — '+t.abbr+' had too many at '+p.pos, season, tr.id);
+  return true;
+}
 function manageRosters(){
   if(S.players.some(function(p){ return p.salary==null && !p.retired; })) ensureContracts();
   var used = {}; S.players.forEach(function(p){ used[p.name.toLowerCase()]=1; });
@@ -632,6 +669,7 @@ function manageRosters(){
       // too many: release the lowest-rated players who aren't this year's rookies
       if(extra > 0){
         at.slice().reverse().filter(function(p){ return p.draftYear!==Y || p.gen; }).slice(0, extra).forEach(function(p){
+          if(p.ovr >= 76 && surplusTrade(p, t, Y)) return;   // good players get traded, not cut
           deadCharge(p, t.id, Y); p.teamId = null; p.contractEnd = Y; p.salary = 0; p.tx = p.tx||[]; p.tx.push({y:Y, type:'Released', txt:'Released by the '+t.city+' '+t.name+' in roster cuts'}); p.log.push(Y+': Released in roster cuts'); cuts++;
         });
       }
@@ -779,11 +817,45 @@ function payroll(tid){
 function capSpace(tid, Y){ return Math.round((capFor(Y) - payroll(tid))*10)/10; }
 function signContract(p, sal, endY){ p.salary = sal; p.contractEnd = endY; p.contractStart = S.year; if(S.payRec) noteRecordContract(p, sal); }
 function contractTxt(sal, yrs){ return yrs+' yr'+(yrs>1?'s':'')+', '+fmtM(sal*yrs)+' total ('+fmtM(sal)+'/yr)'; }
-// teams over the cap release the worst-value contracts
+// Restructures convert salary into a bonus spread over the deal (plus a void year): cap room now, dead money later.
+function restructure(p, t, Y){
+  var left = (p.contractEnd||Y) - Y + 1; if(left < 2 || p.restrY===Y) return 0;
+  var save = Math.round(p.salary * Math.min(.38, .12*left) * 10)/10; if(save < 2) return 0;
+  p.salary = Math.round((p.salary - save)*10)/10; p.restrY = Y; p.restrN = (p.restrN||0)+1;
+  // the pushed money comes due when the deal ends (void-year acceleration)
+  var due = Math.round(save*.65*10)/10, dy = p.contractEnd + 1;
+  t.dead = t.dead || {}; t.dead[dy] = Math.round(((t.dead[dy]||0) + due)*10)/10;
+  t.deadList = t.deadList || []; t.deadList.push({y:dy, id:p.id, n:p.name, a:due, r:1});
+  p.tx = p.tx||[]; p.tx.push({y:Y, type:'Contract', txt:'Restructured his contract with '+t.abbr+' to free '+fmtM(save)+' in cap space'});
+  if(p.ovr>=86) news('ext', 'The '+tn(t.id)+' restructured '+pn(p)+'\'s contract to clear '+fmtM(save)+' in cap space', 3, [p.id]);
+  return save;
+}
+function capFixes(t, Y, cap){
+  var roster = S.players.filter(function(p){ return !p.retired && p.teamId===t.id && (p.salary||0) >= 6; });
+  // 1) pay cuts for aging, overpaid veterans (some refuse and are released later if needed)
+  roster.filter(function(p){ return p.age>=30 && p.salary > marketValue(p, Y)*1.3 && !p.payCutY; }).sort(function(a,b){ return b.salary-a.salary; }).forEach(function(p){
+    if(payroll(t.id) <= cap) return;
+    p.payCutY = Y;
+    var yes = rnd() < (hasT(p,'TF') ? .9 : hasT(p,'DV') ? .3 : .62);
+    if(!yes){ p.tx = p.tx||[]; p.tx.push({y:Y, type:'Contract', txt:'Refused a pay cut from '+t.abbr}); return; }
+    var nv = Math.max(minSalary(Y), Math.round(marketValue(p, Y)*1.05*10)/10), was = p.salary;
+    p.salary = nv; p.mood = Math.max(0, moodOf(p) - 6);
+    p.tx = p.tx||[]; p.tx.push({y:Y, type:'Contract', txt:'Took a pay cut to stay with '+t.abbr+' ('+fmtM(was)+' → '+fmtM(nv)+' a year)'});
+    if(p.ovr>=84) news('ext', pn(p)+' took a pay cut to stay with the '+tn(t.id)+' ('+fmtM(was)+' → '+fmtM(nv)+')', 3, [p.id]);
+  });
+  // 2) restructure the biggest contracts of players the team is keeping
+  roster.filter(function(p){ return p.ovr>=74 && p.age<=32; }).sort(function(a,b){ return b.salary-a.salary; }).forEach(function(p){
+    if(payroll(t.id) <= cap) return;
+    restructure(p, t, Y);
+  });
+}
+// teams still over the cap release the worst-value contracts
 function capCasualties(Y, used){
   var cap = capFor(Y), cut = 0;
   S.teams.forEach(function(t){
     var guard = 0;
+    // like NFL teams, first restructure big deals and ask overpaid veterans to take pay cuts; release only as a last resort
+    if(payroll(t.id) > cap) capFixes(t, Y, cap);
     while(payroll(t.id) > cap && guard++ < 15){
       var roster = S.players.filter(function(p){ return !p.retired && p.teamId===t.id && (p.salary||0) >= 3; });
       if(!roster.length) break;
@@ -1113,7 +1185,7 @@ function applyStyle(p, s, t){
   if(!s.gp) return;
   var sc = {o:teamScheme(t,'QB'), d:teamScheme(t,'LB')}, a = p.arch;
   function sc_(keys, k){ keys.forEach(function(x){ if(s[x]!=null) s[x] = (x==='sck') ? half(s[x]*k) : Math.round(s[x]*k); }); }
-  var passK = {'Air Raid':1.1,'West Coast':1.02,'Spread':1.04,'Run Heavy':.87,'Option':.88,'Balanced':1}[sc.o]||1;
+  var passK = {'Air Raid':1.07,'West Coast':1.02,'Spread':1.03,'Run Heavy':.9,'Option':.9,'Balanced':1}[sc.o]||1;
   var runK = {'Air Raid':.85,'West Coast':.96,'Spread':1.0,'Run Heavy':1.15,'Option':1.07,'Balanced':1}[sc.o]||1;
   switch(p.pos){
     case 'QB':
@@ -1500,33 +1572,34 @@ function genStats(p, role, gp, tc, teamRec){
   var g = gp;
   switch(p.pos){
     case 'QB': {
-      var att = st ? Math.round(g*N(33.5,2.2)) : Math.round(g*U(0,2.5));
+      var att = st ? Math.round(g*N(33,2)) : Math.round(g*(rk===1?U(0,2.2):U(0,.4)));
       var pct = clamp(.60 + d*.004 + tf*.01 + N(0,.015), .48, .74);
       var cmp = Math.round(att*pct);
       var ypa = clamp(6.6 + d*.036 + tf*.2 + N(0,.3), 5.0, 8.7);
       var yds = Math.round(att*ypa);
       var td = pois(att*clamp(.037 + d*.0005 + tf*.0022 + N(0,.004), .015, .058));
-      var int = pois(att*clamp(.028 - d*.0005 + N(0,.003), .008, .05));
+      var int = pois(att*clamp(.025 - d*.0004 + N(0,.0025), .01, .033));
       var sk = Math.round(att*clamp(.07 - d*.0010 + N(0,.01), .03, .13));
-      var ra = Math.round(g*(st?1:.15)*(1.5 + p.mob*6));
-      var ry = Math.round(ra*clamp(3 + p.mob*3.2 + N(0,.5),1,8));
-      var rtd = pois(ra*.035);
+      var ra = Math.round(g*(st?1:.12)*(2.0 + p.mob*5));
+      var ry = Math.round(ra*clamp(2.8 + p.mob*2.9 + N(0,.45),1,7.2));
+      var rtd = pois(ra*.03);
       s.cmp=cmp; s.att=att; s.pyds=yds; s.ptd=td; s.int=int; s.sk=sk; s.ratt=ra; s.ryds=ry; s.rtd=rtd;
       s.rate = passerRating(cmp,att,yds,td,int);
       break;
     }
     case 'RB': {
-      var car = Math.round(g*(st?N(12.9 + Math.max(0,d)*.16, 1.9):N(4.5,1.5))); car=Math.max(0,car);
-      var ypc = clamp(4.0 + d*.022 + tf*.12 + N(0,.3), 3.0, 5.8);
-      s.car=car; s.ryds=Math.round(car*ypc); s.rtd=pois(car*clamp(.027 + d*.0006 + tf*.004,.01,.055));
-      s.rec=Math.max(0,Math.round(g*(st?N(2.8,.7):N(1,.4)))); s.recyds=Math.round(s.rec*clamp(N(8,1.2),4,13)); s.rectd=pois(s.rec*.04);
+      // RB1 gets the bulk; the RB2 spells him; deeper backups barely touch the ball
+      var car = Math.round(g*(st?N(13.2 + Math.max(0,d)*.12, 1.7):rk===1?N(6,1.4):rk===2?N(1.4,.7):N(.3,.3))); car=Math.max(0,car);
+      var ypc = clamp(3.95 + d*.02 + tf*.1 + N(0,.28), 3.0, 5.6);
+      s.car=car; s.ryds=Math.round(car*ypc); s.rtd=pois(car*clamp(.021 + d*.0004 + tf*.003,.008,.04));
+      s.rec=Math.max(0,Math.round(g*(st?N(2.6,.7):rk===1?N(1.3,.4):N(.25,.2)))); s.recyds=Math.round(s.rec*clamp(N(8,1.2),4,13)); s.rectd=pois(s.rec*.035);
       s.fum=pois(car*.007); s.lng = car? Math.round(clamp(ypc*6 + U(4,50),8,99)) : 0;
       break;
     }
     case 'WR': case 'TE': {
-      var per = p.pos==='WR' ? [7.0,5.2,3.9] : [5.3];
-      var tpg = st ? per[Math.min(rk, per.length-1)] : (p.pos==='WR'?1.6:1.8);
-      var tgt = Math.max(0,Math.round(g*N(tpg,.7)));
+      var per = p.pos==='WR' ? [8.0,6.0,3.9] : [5.4];
+      var tpg = st ? per[Math.min(rk, per.length-1)] + (rk===0 ? Math.max(0,d)*.04 : Math.max(0,d)*.025) : (p.pos==='WR' ? (rk===3?1.5:rk===4?.6:.2) : (rk===1?1.8:.5));
+      var tgt = Math.max(0,Math.round(g*N(tpg,.6)));
       var cr = clamp((p.pos==='WR'?.62:.68) + d*.004 + N(0,.03), .45, .82);
       var rec = Math.round(tgt*cr);
       var ypr = clamp((p.pos==='WR'?11.9:10.3) + d*.055 + tf*.35 + N(0,1), 7, 18.5);
@@ -1540,8 +1613,8 @@ function genStats(p, role, gp, tc, teamRec){
     }
     case 'EDGE': case 'DL': case 'LB': case 'CB': case 'S': {
       var f = st?1:.25;
-      var base = {EDGE:[3.3,.32,.016],DL:[3.4,.17,.009],LB:[6.8,.08,.004],CB:[3.9,0,0],S:[5.3,.03,.002]}[p.pos];
-      s.tkl = Math.max(0,Math.round(g*f*N(base[0]*(1+d*.008),.5)));
+      var base = {EDGE:[3.2,.32,.016],DL:[3.3,.17,.009],LB:[6.3,.08,.004],CB:[3.8,0,0],S:[5.0,.03,.002]}[p.pos];
+      s.tkl = Math.max(0,Math.round(g*f*N(base[0]*(1+d*.006),.45)));
       s.sck = half(g*f*clamp(base[1]+d*base[2]+N(0,.09),0,1.15));
       s.tfl = Math.round(s.sck*.8 + g*f*({EDGE:.3,DL:.35,LB:.3,CB:.08,S:.1}[p.pos]));
       var ib = {EDGE:[.005,0],DL:[.003,0],LB:[.025,.0012],CB:[.065,.0035],S:[.06,.003]}[p.pos];
@@ -1567,6 +1640,13 @@ function genStats(p, role, gp, tc, teamRec){
   }
   applyStyle(p, s, t);
   applyTraits(p, s);
+  // keep record-type seasons rare, like the real NFL: anything past these marks gets squeezed toward them
+  [['pyds',5000,.3],['ptd',42,.35],['int',19,.4],['ryds',1750,.35],['rtd',18,.4],['car',330,.4],['recyds',1650,.3],['rec',125,.35],['rectd',15,.4],['tgt',175,.4],['sck',18,.35],['tkl',165,.4],['ratt',140,.5]].forEach(function(c){
+    var v = s[c[0]]; if(v==null || v <= c[1]) return; var nv = c[1] + (v - c[1])*c[2]; s[c[0]] = c[0]==='sck' ? half(nv) : Math.round(nv);
+  });
+  if(s.ryds!=null && s.ratt) s.ryds = Math.min(s.ryds, Math.round(s.ratt*7.5));
+  if(s.rec!=null && s.tgt!=null && s.rec > s.tgt) s.tgt = s.rec;
+  if(s.att){ s.cmp = Math.min(s.cmp, s.att); s.rate = passerRating(s.cmp,s.att,s.pyds,s.ptd,s.int); }
   s.fit = fit.label; s.arch = p.arch; if(p.pos!=='K'&&p.pos!=='P') s.sch = teamScheme(t, p.pos);
   s.score = Math.round((prodScore(p.pos, s) + (o-60)*0.25 + (teamRec?teamRec.w*0.25:0))*10)/10;
   return s;
@@ -1592,6 +1672,74 @@ function prodScore(pos, s){
 }
 
 /* ---------- full season ---------- */
+/* ---------- midseason trade deadline (after Week 9) ----------
+   Losing teams sell veterans (mostly players on expiring deals, "rentals") to contenders for picks.
+   The trades change who plays for whom in Weeks 10-17, and the players' season stats are split between teams. */
+var DEADLINE_WK = 9;
+function planDeadline(Y, rec){
+  var pseudo = {year:Y, standings:rec}, MR = maxDraftRound(), plan = [], dealsBy = {}, big = 0;
+  function wp(id){ var r = rec[id]; return (r.w + r.t*.5)/Math.max(1, r.w+r.l+r.t); }
+  var sellers = S.teams.filter(function(t){ return wp(t.id) <= .34; }).map(function(t){ return t.id; });
+  var buyers = S.teams.filter(function(t){ return wp(t.id) >= .55; }).map(function(t){ return t.id; });
+  if(!sellers.length || !buyers.length) return plan;
+  var target = ri(3, 8), guard = 0;
+  while(plan.length < target && guard++ < 160){
+    var sid = pick(sellers); if((dealsBy[sid]||0) >= 2) continue;
+    var pool = S.players.filter(function(q){ return !q.retired && q.teamId===sid && POS_TV[q.pos] && q.age>=25 && q.ovr>=72 && (q.contractEnd||Y) <= Y+1 && !untouchable(q, Y) && !plan.some(function(d){ return d.pid===q.id; }); });
+    if(!pool.length) continue;
+    var p = pool.sort(function(a,b){ return (b.ovr + (b.contractEnd<=Y?3:0)) - (a.ovr + (a.contractEnd<=Y?3:0)) + U(-5,5); })[0];
+    if(p.ovr >= 88 && big >= 1) continue;
+    var bl = buyers.filter(function(b){ return (dealsBy[b]||0) < 2 && upgradeFor(b, p) >= 3 && capSpace(b, Y) >= (p.salary||0)*.5; });
+    if(!bl.length) continue;
+    var bid = bl.sort(function(a,b){ return (wp(b)+upgradeFor(b,p)/30+U(0,.15)) - (wp(a)+upgradeFor(a,p)/30+U(0,.15)); })[0];
+    var rental = (p.contractEnd||Y) <= Y;
+    var want = playerTradeValue(p, Y) * (rental ? .55 : .85);
+    var pkg = want > 12 ? pickPackage(bid, want, pseudo, MR, 2) : null;
+    if(!pkg){ var o = findPick(bid, Y+1, Math.min(MR, want > 60 ? 4 : 6)); if(o==null) continue; pkg = {picks:[{y:Y+1, rd:Math.min(MR, want > 60 ? 4 : 6), orig:o}]}; }
+    var back = null;
+    if(rnd() < .2){ var bk = S.players.filter(function(q){ return !q.retired && q.teamId===bid && q.pos===p.pos && q.ovr < p.ovr-4 && q.ovr>=62 && !untouchable(q, Y); }); if(bk.length) back = pick(bk); }
+    plan.push({pid:p.id, sid:sid, bid:bid, picks:pkg.picks, back: back ? back.id : null, rental:rental});
+    dealsBy[sid] = (dealsBy[sid]||0)+1; dealsBy[bid] = (dealsBy[bid]||0)+1; if(p.ovr>=88) big++;
+  }
+  return plan;
+}
+// move players for the plan (or move them back)
+function recAtWeek(r, wk){ var o = {w:0,l:0,t:0}; (r.results||[]).forEach(function(g){ if(g[0]>wk) return; if(g[3]>g[4]) o.w++; else if(g[3]<g[4]) o.l++; else o.t++; }); return o; }
+function deadlineMove(plan, forward){
+  plan.forEach(function(d){ var p = P(d.pid), b = d.back!=null ? P(d.back) : null;
+    if(p) p.teamId = forward ? d.bid : d.sid; if(b) b.teamId = forward ? d.sid : d.bid; });
+}
+// share of a player's games that came before the deadline
+function preDeadlineShare(injury, hold){
+  var miss = {}; if(injury) for(var w=injury.week; w<injury.week+injury.missed; w++) miss[w]=1; for(var h=1; h<=(hold||0); h++) miss[h]=1;
+  var a = 0, b = 0; for(var w2=1; w2<=17; w2++){ if(miss[w2]) continue; if(w2<=DEADLINE_WK) a++; else b++; }
+  return a+b ? a/(a+b) : 1;
+}
+function blendStats(s1, s2, f){
+  var o = {}; for(var k in s2) o[k] = s2[k];
+  var keep = {tid:1,tm:1,role:1,ovr:1,age:1,fit:1,arch:1,sch:1,score:1,gp:1,missed:1,inj:1,holdout:1,pavg:1,rate:1,lng:1};
+  for(var k2 in s1){ if(keep[k2] || typeof s1[k2]!=='number') continue; var v = (s1[k2]||0)*f + (s2[k2]||0)*(1-f); o[k2] = k2==='sck' ? half(v) : Math.round(v); }
+  if(s1.lng!=null || s2.lng!=null) o.lng = Math.max(s1.lng||0, s2.lng||0);
+  if(o.att) o.rate = passerRating(o.cmp||0, o.att, o.pyds||0, o.ptd||0, o.int||0);
+  return o;
+}
+function applyDeadline(L){
+  if(!L || !L.dl || L.dl.applied) return;
+  L.dl.applied = true; L.dlMoves = L.dlMoves || [];
+  var Y = L.y, season = {year:Y, moves:L.dlMoves};
+  L.dl.plan.forEach(function(d){
+    var p = P(d.pid); if(!p || p.retired) return;
+    var b = d.back!=null ? P(d.back) : null, sT = teamById(d.sid), bT = teamById(d.bid);
+    d.picks.forEach(function(k){ movePick(k.y, k.rd, k.orig, d.sid); });
+    p.teamId = d.bid; p._tradedY = Y; moodFreshStart(p, false);
+    if(b){ b.teamId = d.sid; b._tradedY = Y; moodFreshStart(b, false); }
+    var tr = recordTrade(season, d.sid, d.bid, {players: b?[b.id]:[], picks:d.picks}, {players:[p.id], picks:[]}, 'player', 'trade deadline');
+    var got = (b ? b.name+' ('+b.pos+')'+(d.picks.length?' and ':'') : '') + d.picks.map(function(k){ return pickTxt(k, d.bid); }).join(' and ');
+    tradeTx(p, Y, 'Traded from '+sT.abbr+' to '+bT.abbr+' at the trade deadline (after Week '+DEADLINE_WK+') for '+got+(d.rental?' — a rental on an expiring deal':''), season, tr.id);
+    if(b) tradeTx(b, Y, 'Traded from '+bT.abbr+' to '+sT.abbr+' at the trade deadline in the deal for '+p.name, season, tr.id);
+    if(p.ovr>=80) news('trade', 'Deadline deal: the '+tn(d.bid)+' ('+recStr(recAtWeek(L.rec[d.bid], DEADLINE_WK))+') acquired '+pn(p)+' ('+p.pos+', '+p.ovr+') from the '+tn(d.sid)+' for '+got, p.ovr>=88?8:6, [p.id]);
+  });
+}
 function startSeason(){
   ensureModel();
   NEWS_Y = S.year - 1;
@@ -1599,8 +1747,13 @@ function startSeason(){
   var Y = S.year; NEWS_Y = Y; GLCACHE = {};
   var ctx = refreshTeamRatings();
   var rec = S.teams.map(function(t){ return {id:t.id,w:0,l:0,t:0,pf:0,pa:0,dw:0,dl:0,cw:0,cl:0,results:[]}; });
-  var sched = makeSchedule();
+  var sched = makeSchedule(), ctx1 = ctx, plan = [];
   sched.forEach(function(wk,wi){
+    if(wi === DEADLINE_WK){
+      // trade deadline: plan the deals, then play the rest of the season with the new rosters
+      plan = planDeadline(Y, rec);
+      if(plan.length){ deadlineMove(plan, true); ctx = refreshTeamRatings(); }
+    }
     wk.forEach(function(g){
       var h=g[0],a=g[1],r=playGame(ctx[h],ctx[a],false,false);
       var H=rec[h],A=rec[a];
@@ -1612,7 +1765,8 @@ function startSeason(){
       H.results.push([wi+1,a,1,r.hs,r.as]); A.results.push([wi+1,h,0,r.as,r.hs]);
     });
   });
-  var L = {y:Y, wk:0, rec:rec, st:{}, inj:{}};
+  var L = {y:Y, wk:0, rec:rec, st:{}, inj:{}, dl:{wk:DEADLINE_WK, plan:plan, applied:false}};
+  var movedTo = {}; plan.forEach(function(d){ movedTo[d.pid] = d.sid; if(d.back!=null) movedTo[d.back] = d.bid; });
   // player stats for the whole season are worked out now and revealed week by week
   var active = S.players.filter(function(p){ return !p.retired && p.teamId!=null; });
   active.forEach(function(p){
@@ -1622,17 +1776,26 @@ function startSeason(){
     if(injury){ gp = 17 - injury.missed; injury.y = Y; injury.team = teamById(p.teamId).abbr; L.inj[p.id] = injury; }
     if(hold) gp = Math.max(0, gp - hold);
     var s = genStats(p, role, gp, ctx[p.teamId], rec[p.teamId]);
+    if(movedTo[p.id]!=null){
+      // split his season: Weeks 1-9 with the old team, the rest with the new one
+      var now = p.teamId, old = movedTo[p.id], f = preDeadlineShare(injury, hold);
+      p.teamId = old; var s1 = genStats(p, ctx1[old].roles[p.id] || {starter:false,rank:9}, gp, ctx1[old], rec[old]); p.teamId = now;
+      s = blendStats(s1, s, f); s.split = {tid:old, wk:DEADLINE_WK};
+    }
     if(injury){ s.missed = injury.missed; s.inj = injury.type; }
     if(hold){ s.holdout = hold; s.missed = (s.missed||0) + hold; }
     s.age = p.age;
     L.st[p.id] = s;
   });
 
+  // rosters stay as they were until the deadline actually passes
+  if(plan.length){ deadlineMove(plan, false); refreshTeamRatings(); }
   S.live = L; NEWS_Y = null;
   return L;
 }
 function finishSeason(){
   var L = S.live, Y = L.y; NEWS_Y = Y; GLCACHE = {};
+  applyDeadline(L);
   var ctx = refreshTeamRatings(), rec = L.rec;
   var active = S.players.filter(function(p){ return !p.retired && p.teamId!=null; });
   active.forEach(function(p){
@@ -1728,7 +1891,7 @@ function finishSeason(){
     year:Y,
     standings: rec.map(function(r){ return {id:r.id,w:r.w,l:r.l,t:r.t,pf:r.pf,pa:r.pa,seed:r.seed||0,divWin:!!r.divWin,finish:r.finish,off:Math.round(ctx[r.id].offEff*10)/10,def:Math.round(ctx[r.id].defEff*10)/10,ro:ctx[r.id].offR!=null?ctx[r.id].offR:null,rd:ctx[r.id].defR!=null?ctx[r.id].defR:null,rv:teamById(r.id).ovrR,results:r.results}; }),
     playoffs: rounds, champ:champ.id, runner: (sbg.hs>sbg.as?sbg.a:sbg.h), sbScore:[Math.max(sbg.hs,sbg.as),Math.min(sbg.hs,sbg.as)],
-    awards: aw, rings: rings, moves:[], retired:[], changes:[], draftCount: S.players.filter(function(p){return p.draftYear===Y && !p.vet;}).length
+    awards: aw, rings: rings, moves:(L.dlMoves||[]), retired:[], changes:[], draftCount: S.players.filter(function(p){return p.draftYear===Y && !p.vet;}).length
   };
 
   // offseason: progression, retirement, contracts
@@ -1864,7 +2027,7 @@ function offseason(season){
     if(pr>0 && rnd()<pr){ retire(p, season, 'retired'); return; }
     // released
     var yrsIn = Y - p.draftYear + 1;
-    if(p.ovr<58 && yrsIn>=2 && rnd()<.45){ var ft=teamById(p.teamId); deadCharge(p, ft.id, Y+1); p.teamId=null; p.salary=0; addTx(p, Y, 'Released', 'Released by the '+ft.city+' '+ft.name, season); return; }
+    if(p.ovr<56 && yrsIn>=3 && (p.salary||0) > minSalary(Y)*1.2 && rnd()<.3){ var ft=teamById(p.teamId); deadCharge(p, ft.id, Y+1); p.teamId=null; p.salary=0; addTx(p, Y, 'Released', 'Released by the '+ft.city+' '+ft.name, season); return; }
     // contracts & free agency
     if(p.contractEnd<=Y){
       var cur = teamById(p.teamId);
@@ -1914,7 +2077,7 @@ function recordTrade(season, a, b, aGets, bGets, kind, note){
     function desc(g){ return (g.players||[]).map(function(id){ var q=P(id); return q? pn(q)+' ('+q.pos+', '+q.ovr+')' : ''; }).concat((g.picks||[]).map(function(k){ return k.y+' '+rdOrd(k.rd)+'-round pick'; })).filter(Boolean).join(', '); }
     var stars = (aGets.players||[]).concat(bGets.players||[]).map(P).filter(function(q){ return q && q.ovr>=85; });
     var firsts = (aGets.picks||[]).concat(bGets.picks||[]).filter(function(k){ return k.rd===1; }).length;
-    if(stars.length || firsts>=2) news('trade', 'Trade: the '+tn(a)+' got '+(desc(aGets)||'nothing')+'; the '+tn(b)+' got '+(desc(bGets)||'nothing'), stars.some(function(q){return q.ovr>=90;})?8:6, stars.map(function(q){return q.id;}));
+    if(note!=='trade deadline' && (stars.length || firsts>=2)) news('trade', 'Trade: the '+tn(a)+' got '+(desc(aGets)||'nothing')+'; the '+tn(b)+' got '+(desc(bGets)||'nothing'), stars.some(function(q){return q.ovr>=90;})?8:6, stars.map(function(q){return q.id;}));
   })();
   return tr;
 }
@@ -1923,46 +2086,165 @@ function tradeTx(p, y, txt, season, trId){
   season.moves.push({id:p.id, type:'Trade', txt:p.name+' — '+txt, tradeId:trId});
 }
 function pickTxt(k, holder){ return pickLabel(k.y, k.rd, k.orig, holder); }
-// Offseason trades — like the NFL, most deals are built around draft picks.
+// Offseason trades, modeled on how NFL teams actually deal:
+//  - every player and pick has a trade value (picks on a Rich Hill-style draft chart, players by rating,
+//    age, position and contract), and packages have to roughly balance
+//  - rebuilding teams sell veterans, contenders buy starters, cap-strapped teams dump big contracts,
+//    teams with surplus depth move backups for late picks, and the odd player-for-player swap happens
+//  - franchise QBs and young stars almost never move; the buyer needs cap room and a real hole at the spot
+var POS_TV = {QB:1.9,EDGE:1.3,OT:1.15,WR:1.15,CB:1.1,DL:1.05,TE:.85,S:.85,LB:.8,OG:.8,C:.75,RB:.7,K:0,P:0};
+function pickSlotValue(n){ return Math.round(1000*Math.exp(-0.0235*(Math.max(1,n)-1))); }
+function projSlot(orig, y, rd, season){
+  // where a pick is likely to land: next year's order follows this season's record, later years are a guess
+  var Y = season.year;
+  if(y === Y+1){ var ord = season.standings.slice().sort(function(a,b){ return ((a.w+a.t*.5)-(b.w+b.t*.5)) || ((a.pf-a.pa)-(b.pf-b.pa)); }).map(function(r){ return r.id; }); return (rd-1)*32 + ord.indexOf(orig) + 1; }
+  return (rd-1)*32 + 16;
+}
+function pickTradeValue(k, season){ var v = pickSlotValue(projSlot(k.orig, k.y, k.rd, season)); return Math.round(v * Math.pow(.82, Math.max(0, k.y - season.year - 1))); }
+function playerTradeValue(p, Y){
+  var pv = POS_TV[p.pos]||.8; if(!pv) return 0;
+  var base = Math.pow(Math.max(0, p.ovr-64), 2.15)*.62;
+  var a = p.age, af = a<=24 ? 1.2 : a<=26 ? 1.12 : a<=28 ? 1 : a===29 ? .78 : a===30 ? .58 : a===31 ? .42 : .28;
+  if(p.pos==='QB') af = a<=30 ? Math.max(af, .95) : a<=33 ? .6 : .35;
+  var mv = marketValue(p, Y+1), sal = p.salary||mv, surplus = clamp(.9 + (mv-sal)/Math.max(1,mv)*.45, .55, 1.35);
+  var yrs = (p.contractEnd||Y+1) - Y, cf = yrs<=1 ? .82 : yrs===2 ? .95 : 1;
+  var star = p.ovr>=94 ? 1.9 : p.ovr>=91 ? 1.6 : p.ovr>=88 ? 1.35 : p.ovr>=85 ? 1.15 : 1;   // top players cost a lot
+  return Math.round(base*pv*af*surplus*cf*star);
+}
+function teamTradeMode(tid, season){
+  var r = season.standings[tid], wp = (r.w+r.t*.5)/Math.max(1,r.w+r.l+r.t), t = teamById(tid);
+  var vets = S.players.filter(function(p){ return !p.retired && p.teamId===tid && p.ovr>=75; }), oldShare = vets.length ? vets.filter(function(p){ return p.age>=29; }).length/vets.length : 0;
+  if(wp <= .35 || (wp <= .45 && oldShare >= .45)) return 'rebuild';
+  if(wp >= .6 || (t.ovrR||78) >= 84) return 'contend';
+  return 'middle';
+}
+function startersAt(tid, pos){ return S.players.filter(function(q){ return !q.retired && q.teamId===tid && q.pos===pos; }).sort(function(a,b){ return b.ovr-a.ovr; }); }
+function upgradeFor(tid, p){ var at = startersAt(tid, p.pos), k = SLOTS[p.pos]||1, weakest = at[k-1]; return weakest ? p.ovr - weakest.ovr : p.ovr - 60; }
+function untouchable(p, Y, star){
+  if(p.treq===Y) return false;
+  if(star && p.pos!=='QB' && rnd() < .3) return false;
+  if(p.pos==='QB' && p.age<=29 && p.ovr>=83) return true;          // franchise QBs stay put
+  if(p.age<=25 && p.ovr>=88) return true;                          // young stars stay put
+  if(!p.vet && p.draftYear >= Y-1 && p.round<=2) return true;       // recent high picks
+  return false;
+}
+// build a pick package from the buyer's next two drafts worth about `want`
+function pickPackage(bid, want, season, MR, maxN){ maxN = maxN||3;
+  var Y = season.year, avail = [];
+  [Y+1, Y+2].forEach(function(y){ for(var rd=1; rd<=MR; rd++){ var o = findPick(bid, y, rd); if(o!=null){ var k = {y:y, rd:rd, orig:o}; k.v = pickTradeValue(k, season); avail.push(k); } } });
+  if(!avail.length) return null;
+  avail.sort(function(a,b){ return b.v-a.v; });
+  var pk = [], sum = 0;
+  // the best single pick that doesn't overpay by much, then top up with smaller ones
+  for(var i=0;i<avail.length && sum < want*.92 && pk.length<maxN;i++){
+    var k = avail[i];
+    if(sum + k.v <= want*1.22){ pk.push(k); sum += k.v; }
+  }
+  if(sum < want*.72) return null;
+  return {picks:pk.map(function(k){ return {y:k.y, rd:k.rd, orig:k.orig}; }), v:sum};
+}
+function tradeDeadCharge(p, tid, Y){
+  // the old team keeps the unamortized signing bonus: about half of what a release would cost
+  if(!p.salary || p.contractEnd==null) return 0;
+  var left = p.contractEnd - Y; if(left <= 1) return 0;
+  var amt = Math.round(p.salary * Math.min(.3, .1*left) * 10)/10; if(amt < .5) return 0;
+  var t = teamById(tid); t.dead = t.dead || {}; t.dead[Y+1] = Math.round(((t.dead[Y+1]||0) + amt)*10)/10;
+  t.deadList = t.deadList || []; t.deadList.push({y:Y+1, id:p.id, n:p.name, a:amt});
+  return amt;
+}
+function pickListTxt(picks, holder){ return picks.map(function(k){ return pickTxt(k, holder); }).join(' and '); }
 function doTrades(season){
-  var Y = season.year, n = ri(6,10), done = tradeRequests(season), MR = maxDraftRound(); n += done;
-  var rank = season.standings.slice().sort(function(a,b){ return (b.w-a.w) || ((b.pf-b.pa)-(a.pf-a.pa)); }).map(function(r){return r.id;});
-  var contenders = rank.slice(0,14), sellers = rank.slice(14);
-  function ownPick(team, y, rd){ var o = findPick(team, y, rd); return o==null ? null : {y:y, rd:rd, orig:o}; }
-  for(var t=0; t<n*5 && done<n; t++){
-    var sid = pick(sellers);
-    var pool = S.players.filter(function(p){ return !p.retired && p.teamId===sid && p.ovr>=72 && p.age>=24 && p._tradedY!==Y && p.pos!=='K' && p.pos!=='P'; });
-    if(!pool.length) continue;
-    pool.sort(function(a,b){ return b.ovr-a.ovr; });
-    var p = pool[Math.min(pool.length-1, ri(0,3))];
-    var needy = contenders.filter(function(cid){ var at = S.players.filter(function(q){ return !q.retired && q.teamId===cid && q.pos===p.pos; }).map(function(q){return q.ovr;}).sort(function(a,b){return b-a;}); return at.length < SLOTS[p.pos] || at[SLOTS[p.pos]-1] < p.ovr - 2; });
-    if(!needy.length) continue;
-    var bid = pick(needy);
-    // price in picks: stars cost firsts (sometimes two), good starters a 2nd, others a mid-round pick
-    var want = [];
-    var oldDiscount = p.age>=30 ? 1 : 0;
-    if(p.ovr>=92 && !oldDiscount){ want.push([Y+1,1]); want.push([Y+2,1]); }
-    else if(p.ovr>=86){ want.push([rnd()<.5?Y+1:Y+2, 1]); if(rnd()<.5) want.push([Y+2, ri(2,Math.min(3,MR))]); }
-    else if(p.ovr>=80){ want.push([Y+1,2]); if(rnd()<.4) want.push([Y+2, Math.min(MR, ri(2,4))]); }
-    else want.push([Y+1, Math.min(MR, ri(3,5))]);
-    if(oldDiscount) want = want.map(function(w){ return [w[0], Math.min(MR, w[1]+1)]; });
-    var picks = []; want.forEach(function(w){ var k = ownPick(bid, w[0], w[1]); if(k) picks.push(k); });
-    var young = S.players.filter(function(q){ return !q.retired && q.teamId===bid && q.age<=25 && q.ovr>=62 && q.ovr<p.ovr && q._tradedY!==Y && q.pos!=='K' && q.pos!=='P'; });
-    var back = (young.length && rnd()<.22) ? pick(young) : null;
-    if(back && picks.length>1) picks.pop();
-    if(!picks.length && !back) continue;
-    // sometimes the seller sends a late pick back to balance the deal
-    var sweet = (rnd()<.2) ? ownPick(sid, Y+1, MR) : null;
-    var sT = teamById(sid), bT = teamById(bid);
-    picks.forEach(function(k){ movePick(k.y, k.rd, k.orig, sid); });
-    if(sweet) movePick(sweet.y, sweet.rd, sweet.orig, bid);
-    p.teamId = bid; p._tradedY = Y; moodFreshStart(p, !!p.treq);
-    if(back){ back.teamId = sid; back._tradedY = Y; moodFreshStart(back, false); }
-    var tr = recordTrade(season, sid, bid, {players: back?[back.id]:[], picks:picks}, {players:[p.id], picks: sweet?[sweet]:[]}, 'player');
-    var got = (back? back.name+' ('+back.pos+')' : '') + (back && picks.length? ' and ' : '') + picks.map(function(k){ return pickTxt(k, bid); }).join(' and ');
-    tradeTx(p, Y, 'Traded from '+sT.abbr+' to '+bT.abbr+' for '+got+(sweet? ' (with '+pickTxt(sweet, sid)+' going to '+bT.abbr+')':''), season, tr.id);
-    if(back) tradeTx(back, Y, 'Traded from '+bT.abbr+' to '+sT.abbr+' in the deal for '+p.name+' ('+p.pos+')', season, tr.id);
-    done++;
+  var Y = season.year, MR = maxDraftRound(), made = tradeRequests(season), guard = 0;
+  var mode = {}; S.teams.forEach(function(t){ mode[t.id] = teamTradeMode(t.id, season); });
+  var target = ri(11, 17), dealsBy = {};
+  function busy(tid){ return (dealsBy[tid]||0) >= 3; }
+  function ok(p){ return p && !p.retired && p.teamId!=null && p._tradedY!==Y && POS_TV[p.pos] && !untouchable(p, Y) && p.age>=22; }
+  function canAfford(bid, inSal, outSal){ return capSpace(bid, Y+1) + (outSal||0) >= (inSal||0); }
+  function buyersFor(p, sid, minUp){
+    return S.teams.filter(function(t){ return t.id!==sid && !busy(t.id) && upgradeFor(t.id, p) >= minUp && canAfford(t.id, p.salary||0, 0) && (p.age<=29 || mode[t.id]!=='rebuild'); })
+      .map(function(t){ return {id:t.id, w:(mode[t.id]==='contend'?3:mode[t.id]==='middle'?1.4:.5) * (1 + upgradeFor(t.id,p)/8) * U(.6,1.4)}; })
+      .sort(function(a,b){ return b.w-a.w; });
+  }
+  function execute(sid, bid, p, pkg, kind, extra){
+    var sT = teamById(sid), bT = teamById(bid), dm = tradeDeadCharge(p, sid, Y);
+    pkg.picks.forEach(function(k){ movePick(k.y, k.rd, k.orig, sid); });
+    var backs = extra && (extra.backs || (extra.back ? [extra.back] : [])) || [];
+    p.teamId = bid; p._tradedY = Y; moodFreshStart(p, false);
+    backs.forEach(function(q){ tradeDeadCharge(q, bid, Y); q.teamId = sid; q._tradedY = Y; moodFreshStart(q, false); });
+    var tr = recordTrade(season, sid, bid, {players: backs.map(function(q){ return q.id; }), picks:pkg.picks}, {players:[p.id], picks:[]}, 'player', extra && extra.note);
+    var got = backs.map(function(q){ return q.name+' ('+q.pos+', '+q.ovr+')'; }).concat(pkg.picks.map(function(k){ return pickTxt(k, bid); })).join(', ').replace(/, ([^,]*)$/, ' and $1');
+    var why = kind==='cap' ? ' — a cap move'+(dm?' ('+fmtM(dm)+' in dead money stays with '+sT.abbr+')':'') : kind==='rebuild' ? ' as '+sT.abbr+' rebuilds' : kind==='depth' ? ' — surplus depth' : kind==='star' ? ' — a blockbuster' : '';
+    tradeTx(p, Y, 'Traded from '+sT.abbr+' to '+bT.abbr+' for '+(got||'future considerations')+why, season, tr.id);
+    backs.forEach(function(q){ tradeTx(q, Y, 'Traded from '+bT.abbr+' to '+sT.abbr+' in the deal for '+p.name+' ('+p.pos+')', season, tr.id); });
+    dealsBy[sid] = (dealsBy[sid]||0)+1; dealsBy[bid] = (dealsBy[bid]||0)+1; if(p.ovr>=88) dealsBy.big = (dealsBy.big||0)+1; made++;
+  }
+  while(made < target && guard++ < 400){
+    var roll = rnd(), sid, p, kind, minUp;
+    if(roll < .06 && (dealsBy.star||0) < 2 && (dealsBy.big||0) < 3){
+      // 5) blockbuster: a contender goes all-in for a star, paying with good players and multiple high picks
+      var bidS = pick(S.teams.filter(function(t){ return mode[t.id]!=='rebuild' && !busy(t.id); }) || []); if(!bidS) continue;
+      var stars = S.players.filter(function(q){ return !q.retired && q.teamId!=null && q.teamId!==bidS.id && q._tradedY!==Y && POS_TV[q.pos] && q.ovr>=87 && q.age<=30 && !untouchable(q, Y, true) && mode[q.teamId]!=='contend' && !busy(q.teamId) && upgradeFor(bidS.id, q)>=6; });
+      if(!stars.length) continue;
+      var st = pick(stars), sidS = st.teamId, valS = playerTradeValue(st, Y) * 1.08;   // sellers want a premium for a star
+      if(!canAfford(bidS.id, st.salary||0, 0)){
+        // the buyer can send salary back in the deal
+      }
+      var offer = S.players.filter(function(q){ return q.teamId===bidS.id && q._tradedY!==Y && POS_TV[q.pos] && !untouchable(q, Y) && q.age<=27 && q.ovr>=70 && q.ovr <= st.ovr-5 && q.pos!=='QB'; })
+        .sort(function(a,b){ return playerTradeValue(b,Y)-playerTradeValue(a,Y); });
+      var backsS = [], pv2 = 0, outSal = 0;
+      for(var oi=0; oi<offer.length && backsS.length<2 && pv2 < valS*.5; oi++){ var ov = playerTradeValue(offer[oi], Y); if(pv2 + ov <= valS*.6){ backsS.push(offer[oi]); pv2 += ov; outSal += offer[oi].salary||0; } }
+      if(!canAfford(bidS.id, st.salary||0, outSal)) continue;
+      var pkgS = pickPackage(bidS.id, valS - pv2, season, MR, 4);
+      if(!pkgS || pkgS.v + pv2 < valS*.95) continue;
+      if(!pkgS.picks.some(function(k){ return k.rd===1; }) && st.ovr>=90) continue;   // a true star always costs a 1st
+      execute(sidS, bidS.id, st, pkgS, 'star', {backs:backsS, note:'blockbuster'}); dealsBy.star = (dealsBy.star||0)+1;
+      continue;
+    } else if(roll < .5){
+      // 1) rebuilding teams sell veterans to teams that need them
+      var sellers = S.teams.filter(function(t){ return mode[t.id]==='rebuild' && !busy(t.id); }); if(!sellers.length) continue;
+      sid = pick(sellers).id; kind = 'rebuild'; minUp = 3;
+      var pool = S.players.filter(function(q){ return q.teamId===sid && ok(q) && q.age>=27 && q.ovr>=72; });
+      if(!pool.length) continue; p = pool.sort(function(a,b){ return b.ovr-a.ovr + U(-6,6); })[0];
+    } else if(roll < .64){
+      // 2) cap-strapped teams move a big contract
+      var tight = S.teams.filter(function(t){ return capSpace(t.id, Y+1) < 8 && !busy(t.id); }); if(!tight.length) continue;
+      sid = pick(tight).id; kind = 'cap'; minUp = 2;
+      var pool2 = S.players.filter(function(q){ return q.teamId===sid && ok(q) && (q.salary||0) >= 12 && q.age>=26 && q.ovr>=74; });
+      if(!pool2.length) continue; p = pool2.sort(function(a,b){ return (b.salary - b.ovr*.15) - (a.salary - a.ovr*.15); })[0];
+    } else if(roll < .9){
+      // 3) a team with three good players at one spot moves the odd man out for a late pick
+      sid = ri(0,31); if(busy(sid)) continue; kind = 'depth'; minUp = 4;
+      var groups = POS_LIST.filter(function(pos){ var at = startersAt(sid,pos); return POS_TV[pos] && at.length > (SLOTS[pos]||1) && at[SLOTS[pos]||1].ovr >= 70; });
+      if(!groups.length) continue; var at = startersAt(sid, pick(groups)); p = at[SLOTS[at[0].pos]||1];
+      if(!ok(p)) continue;
+    } else {
+      // 4) player-for-player swap of similar value at positions each side needs
+      var a = ri(0,31), b = ri(0,31); if(a===b || busy(a) || busy(b)) continue;
+      var pa = S.players.filter(function(q){ return q.teamId===a && ok(q) && q.ovr>=72 && upgradeFor(b,q)>=3; });
+      var pb = S.players.filter(function(q){ return q.teamId===b && ok(q) && q.ovr>=72 && upgradeFor(a,q)>=3 && q.pos!==(pa[0]||{}).pos; });
+      if(!pa.length || !pb.length) continue;
+      var x = pick(pa), yv = playerTradeValue(x, Y), yb = pb.filter(function(q){ var v = playerTradeValue(q, Y); return v >= yv*.75 && v <= yv*1.3; });
+      if(!yb.length) continue; var z = pick(yb);
+      if(!canAfford(b, x.salary||0, z.salary||0) || !canAfford(a, z.salary||0, x.salary||0)) continue;
+      execute(a, b, x, {picks:[]}, 'swap', {back:z, note:'player swap'});
+      continue;
+    }
+    if(p.ovr>=88 && (dealsBy.big||0) >= 2) continue;   // stars rarely move: a couple a year at most
+    var val = playerTradeValue(p, Y); if(val < 15) continue;
+    var buyers = buyersFor(p, sid, minUp); if(!buyers.length) continue;
+    var bid = buyers[0].id;
+    // sellers in a hurry take a bit less; contenders pay a bit more
+    var want = val * (kind==='cap' ? .75 : kind==='depth' ? .9 : 1) * (mode[bid]==='contend' ? 1.08 : 1);
+    var back = null;
+    if(rnd() < .25){
+      var young = S.players.filter(function(q){ return q.teamId===bid && ok(q) && q.age<=25 && q.ovr>=64 && upgradeFor(sid,q)>=0 && playerTradeValue(q,Y) < want*.6; });
+      if(young.length){ back = pick(young); want -= playerTradeValue(back, Y); }
+    }
+    var pkg = want > 12 ? pickPackage(bid, want, season, MR) : {picks:[], v:0};
+    if(!pkg){ continue; }
+    if(!pkg.picks.length && !back){ var o7 = findPick(bid, Y+1, MR); if(o7==null) continue; pkg = {picks:[{y:Y+1, rd:MR, orig:o7}]}; }
+    if(back && !canAfford(bid, p.salary||0, back.salary||0)) back = null;
+    execute(sid, bid, p, pkg, kind, back ? {back:back} : null);
   }
 }
 // Pick-only trades after the draft order is set: teams trade up and down the board, and deal future picks.
@@ -2035,7 +2317,7 @@ function retire(p, season, why){
 
 /* ---------- UI helpers ---------- */
 var view = document.getElementById('view');
-var UI = {tab:'home', draftPreview:null, draftErrors:[], draftMode:'sim', fillTo:224, showGen:false, movesYear:null, plFilter:{cls:'all',team:'all',pos:'all',status:'active',src:'all'}, stFilter:{year:null,cat:'pass',team:'all',cls:'all',src:'all'}, stdYear:null, poYear:null, sort:{}};
+var UI = {tab:'home', draftPreview:null, draftErrors:[], draftMode:'sim', fillTo:224, showGen:false, movesYear:null, plFilter:{cls:'all',team:'all',pos:'all',status:'active',src:'all'}, stFilter:{year:null,cat:'player',team:'all',cls:'all',src:'all'}, stdYear:null, poYear:null, sort:{}};
 try{ var uiSaved = JSON.parse(localStorage.getItem(LS_KEY+'-ui')||'null'); if(uiSaved){ UI.plFilter = uiSaved.plFilter||UI.plFilter; } }catch(e){}
 function saveUI(){ try{ localStorage.setItem(LS_KEY+'-ui', JSON.stringify({plFilter:UI.plFilter})); }catch(e){} }
 function toast(msg){ var t=document.getElementById('toast'); t.innerHTML=msg; t.className='toast show'; clearTimeout(toast._t); toast._t=setTimeout(function(){t.className='toast';},3500); }
@@ -2498,7 +2780,22 @@ function fpts(s){
 function fppg(s){ return s && s.gp ? Math.round(fpts(s)/s.gp*10)/10 : 0; }
 var FCOL = ['fpts','FPTS',function(s){ return fmt1(fpts(s)); },fpts];
 var FPPG = ['fppg','Pts/G',function(s){ return fmt1(fppg(s)); },fppg];
+function zv(v){ return v ? fmtN(v) : '<span class="muted">0</span>'; }
 var CATS = {
+  player:{l:'By player',pos:['QB','RB','WR','TE','K','DL','EDGE','LB','CB','S'],cols:[
+    ['pyds','Pass Yds',function(s){ return zv(s.att!=null ? s.pyds : 0); },function(s){ return s.att!=null ? s.pyds||0 : 0; }],
+    ['ptd','Pass TD',function(s){ return zv(s.att!=null ? s.ptd : 0); },function(s){ return s.att!=null ? s.ptd||0 : 0; }],
+    ['intt','INT',function(s){ return zv(s.att!=null ? s.int : 0); },function(s){ return s.att!=null ? s.int||0 : 0; }],
+    ['ruyd','Rush Yds',function(s){ return zv(s.ryds); },function(s){ return s.ryds||0; }],
+    ['rutd','Rush TD',function(s){ return zv(s.rtd); },function(s){ return s.rtd||0; }],
+    ['rcp','Rec',function(s){ return zv(s.rec); },function(s){ return s.rec||0; }],
+    ['rcy','Rec Yds',function(s){ return zv(s.recyds); },function(s){ return s.recyds||0; }],
+    ['rct','Rec TD',function(s){ return zv(s.rectd); },function(s){ return s.rectd||0; }],
+    ['fg','FG',function(s){ return s.fga!=null ? (s.fgm||0)+'/'+(s.fga||0) : '<span class="muted">—</span>'; },function(s){ return s.fgm||0; }],
+    ['dtk','Tkl',function(s){ return zv(s.tkl); },function(s){ return s.tkl||0; }],
+    ['dsk','Sack',function(s){ return zv(s.sck); },function(s){ return s.sck||0; }],
+    ['dint','Def INT',function(s){ return zv(s.att==null ? s.int : 0); },function(s){ return s.att==null ? s.int||0 : 0; }],
+    FCOL, FPPG],def:'fpts'},
   pass:{l:'Passing',pos:['QB'],cols:[['cmp','Cmp'],['att','Att'],['pct','Pct',function(s){return s.att?fmt1(s.cmp/s.att*100):'-';},function(s){return s.att?s.cmp/s.att:0;}],['pyds','Yds'],['ypa','Y/A',function(s){return s.att?fmt1(s.pyds/s.att):'-';},function(s){return s.att?s.pyds/s.att:0;}],['ptd','TD'],['int','INT'],['rate','Rate',function(s){return fmt1(s.rate);}],['sk','Sck'],['ratt','Rush'],['ryds','RuYds'],['rtd','RuTD'],FCOL,FPPG],def:'pyds'},
   rush:{l:'Rushing',pos:['RB','QB'],cols:[['car','Att',function(s){return s.car!=null?s.car:s.ratt;},function(s){return s.car!=null?s.car:s.ratt;}],['ryds','Yds'],['ypc','Avg',function(s){var a=s.car!=null?s.car:s.ratt;return a?fmt1(s.ryds/a):'-';},function(s){var a=s.car!=null?s.car:s.ratt;return a?s.ryds/a:0;}],['rtd','TD'],['lng','Lng'],['fum','Fum'],['rec','Rec'],['recyds','RecYds'],['rectd','RecTD'],FCOL,FPPG],def:'ryds'},
   rec:{l:'Receiving',pos:['WR','TE','RB'],cols:[['tgt','Tgt'],['rec','Rec'],['recyds','Yds'],['ypr','Avg',function(s){return s.rec?fmt1(s.recyds/s.rec):'-';},function(s){return s.rec?s.recyds/s.rec:0;}],['rectd','TD'],['lng','Lng'],FCOL,FPPG],def:'recyds'},
@@ -2517,7 +2814,7 @@ function renderStats(){
   if(F.cat==='rec') list = list.filter(function(p){ return (p.stats[y].rec||0)>0; });
   var FPOS = {all:null, off:['QB','RB','WR','TE','K'], idp:['DL','EDGE','LB','CB','S'], QB:['QB'], RB:['RB'], WR:['WR'], TE:['TE'], K:['K']};
   var posRank = {};
-  if(F.cat==='fan'){
+  if(F.cat==='fan' || F.cat==='player'){
     F.fpos = F.fpos || 'off';
     var fl = FPOS[F.fpos];
     list = list.filter(function(p){ return p.stats[y].gp>0 && (!fl || fl.indexOf(p.pos)>=0); });
@@ -2526,7 +2823,7 @@ function renderStats(){
     Object.keys(byPos).forEach(function(k){ byPos[k].sort(function(a,b){ return fpts(b.stats[y])-fpts(a.stats[y]); }).forEach(function(p,i){ posRank[p.id]=k+(i+1); }); });
   }
   var classes = Object.keys(S.players.filter(notVet).reduce(function(m,p){m[p.draftYear]=1;return m;},{})).sort();
-  var h = '<div class="card"><h2>'+y+' season stats</h2><p class="lead">Pick a stat category below. OVR is the player\'s rating during that season; Role shows whether he started.</p><div class="filters">'+
+  var h = '<div class="card"><h2>'+y+' season stats</h2><p class="lead"><b>By player</b> shows one row per player with all his stats and fantasy points; the other tabs show one stat category at a time. OVR is the player\'s rating during that season.</p><div class="filters">'+
     sel('year','Season',S.seasons.slice().reverse().map(function(s){return [String(s.year),s.year+' season'];}),String(y),'st')+
     sel('team','Team',[['all','All teams']].concat(S.teams.slice().sort(function(a,b){return a.abbr.localeCompare(b.abbr);}).map(function(t){return [String(t.id),t.abbr];})),F.team,'st')+
     sel('cls','Class',[['all','All classes']].concat(classes.map(function(c){return [c,c+' class'];})),F.cls,'st')+sel('src','Source',[['all','Everyone'],['mine','Only yours'],['gen','Only generated rookies'],['vet','Only veterans']],F.src||'all','st')+'</div>';
@@ -2544,6 +2841,14 @@ function renderStats(){
   cat.cols.forEach(function(c){
     cols.push({k:c[0],l:c[1],n:1,f:function(p){ var s=p.stats[y]; return c[2]? c[2](s) : (s[c[0]]!=null?fmtN(s[c[0]]):'-'); },sv:function(p){ var s=p.stats[y]; return c[3]? c[3](s) : (c[2]? parseFloat(c[2](s))||0 : s[c[0]]); }});
   });
+  if(F.cat==='player'){
+    var hide = {off:['dtk','dsk','dint'], QB:['rcp','rcy','rct','fg','dtk','dsk','dint'], RB:['pyds','ptd','intt','fg','dtk','dsk','dint'], WR:['pyds','ptd','intt','fg','dtk','dsk','dint'], TE:['pyds','ptd','intt','fg','dtk','dsk','dint'],
+      K:['pyds','ptd','intt','ruyd','rutd','rcp','rcy','rct','dtk','dsk','dint'], idp:['pyds','ptd','intt','ruyd','rutd','rcp','rcy','rct','fg']}[F.fpos] || [];
+    cols = cols.filter(function(c){ return c.k!=='sch' && c.k!=='role' && hide.indexOf(c.k)<0; });
+    cols.splice(2,0,{k:'prank',l:'Pos rank',f:function(p){ return '<b>'+(posRank[p.id]||'')+'</b>'; },sv:function(p){ var r=posRank[p.id]||''; return parseInt(r.replace(/\D/g,''),10)||999; },title:'Rank at his position by fantasy points'});
+    h += '<div class="filters" style="margin-top:-4px">'+sel('fpos','Positions',[['off','Offense + K'],['QB','QB'],['RB','RB'],['WR','WR'],['TE','TE'],['K','K'],['idp','Defense'],['all','Everyone']],F.fpos,'st')+
+      '<span class="small muted">One row per player with all his stats and his fantasy points (PPR, IDP for defenders). Click any column to sort.</span></div>';
+  }
   if(F.cat==='fan'){
     cols.splice(2,0,{k:'prank',l:'Pos rank',f:function(p){ return '<b>'+(posRank[p.id]||'')+'</b>'; },sv:function(p){ var r=posRank[p.id]||''; return parseInt(r.replace(/\D/g,''),10)||999; },title:'Rank at his position by fantasy points'});
     cols.push({k:'line',l:'Season line',nosort:1,f:function(p){ return '<span class="small">'+esc(statLine(p,y))+'</span>'; }});
@@ -3236,6 +3541,7 @@ function openPlayer(id){
     '<span>Career</span><span>'+careerSummary(p)+'</span></div>';
   var curT = p.teamId!=null ? teamById(p.teamId) : null, fit = curT ? schemeFit(p, curT) : null, ad = archDef(p.pos, p.arch);
   h += '<h3>Player type &amp; attributes</h3><div class="row" style="gap:8px;margin-bottom:10px">'+archBadge(p)+'<span class="small muted">'+esc(ad.d||'')+'</span>'+(fit && fit.scheme? ' · '+fitBadge(fit.label)+' <span class="small muted">in '+esc(curT.abbr)+'\'s '+esc(fit.scheme)+' '+(SIDE[p.pos]==='off'?'offense':'defense')+'</span>' : '')+'</div>'+attrBars(p);
+  h += weeklyLog(p);
   // teams
   h += '<h3>Teams</h3><div class="row" style="gap:6px">'+(spans.length? spans.map(function(sp,i){ var t=teamById(sp.tid); return (i?'<span class="muted">→</span>':'')+'<span class="badge" style="font-size:12px;padding:4px 8px"><b class="tlink" data-team="'+sp.tid+'">'+esc(t.city+' '+t.name)+'</b> '+(sp.upcoming? 'from '+sp.from : sp.from+(sp.to!==sp.from?'–'+sp.to:'')+(sp.now?'–now':''))+'</span>'; }).join('') : '<span class="badge" style="font-size:12px;padding:4px 8px">'+esc(tName(p.teamId))+'</span>')+'</div>';
   // rating & team by season
@@ -3275,11 +3581,14 @@ function openTeam(id, tab){
   var t=teamById(id); tab = tab||'ov';
   var h = (buildTeamCtx(t),'')+'<h2 style="font-size:24px">'+esc(t.city+' '+t.name)+'</h2><div class="muted">'+t.conf+' '+t.div+' · '+(t.titles||0)+' championships in this league</div><div class="teamrates">'+teamRatingsBadges(t)+'</div>';
   h += teamTabs(id, tab);
+  if(tab==='moves'){ openModal(h + teamMovesHTML(id, UI.tmMovesY)); return; }
   if(tab==='hist'){ openModal(h + teamHistoryHTML(id)); return; }
   if(tab==='hof'){ openModal(h + teamHofHTML(id)); return; }
   var roster = S.players.filter(function(p){return !p.retired && p.teamId===id;}).sort(function(a,b){return b.ovr-a.ovr;});
   var picksHtml = teamPicksHtml(id);
   h += lockerRoom(id);
+  if(S.seasons.length){ var lsY = lastSeason().year, ntr = (S.trades||[]).filter(function(tr){ return tr.y===lsY && (tr.a===id||tr.b===id); }).length, ndr = S.players.filter(function(p){ return !p.vet && p.draftYear===lsY+1 && p.draftTeamId===id && p.pick; }).length;
+    h += '<div class="small" style="margin-top:10px">Last offseason: <b>'+ndr+'<\/b> draft pick'+(ndr===1?'':'s')+', <b>'+ntr+'<\/b> trade'+(ntr===1?'':'s')+'. <button class="btn" data-teamtab="'+id+'|moves">See all moves &amp; draft picks →<\/button><\/div>'; }
   h += '<h3>Coach &amp; schemes</h3>'+coachCard(t)+(t.coachHist && t.coachHist.length? '<div class="small muted" style="margin-top:8px">Past coaches: '+t.coachHist.slice().reverse().map(function(c){ return esc(c.name)+' ('+c.from+'–'+c.to+', '+c.w+'-'+c.l+(c.why==='fired'?', fired':', retired')+')'; }).join(' · ')+'</div>' : '');
   var pay = payroll(id), cap = capFor(S.year), pct = Math.min(100, Math.round(pay/cap*100));
   h += '<h3>Salary cap</h3><div class="capbar"><div style="width:'+pct+'%" class="'+(pay>cap?'over':'')+'"></div></div><div class="small" style="margin-top:6px"><b>'+fmtM(pay)+'</b> spent of the '+fmtM(cap)+' cap · '+capCell(id)+' '+(pay>cap?'over the cap':'left')+(deadMoney(id,S.year)? ' · includes '+fmtM(deadMoney(id,S.year))+' in dead money ('+((t.deadList||[]).filter(function(d){return d.y===S.year;}).sort(function(a,b){return b.a-a.a;}).slice(0,3).map(function(d){ return esc(d.n)+' '+fmtM(d.a); }).join(', '))+')' : '')+'</div>';
@@ -3399,7 +3708,7 @@ function alloc(total, w){
 function gameLines(p, y){
   var key = p.id+'-'+y; if(GLCACHE[key]) return GLCACHE[key];
   var s = statsOf(p, y), ss = seasonOrLive(y); if(!s || !ss || !s.gp) return (GLCACHE[key] = {});
-  var res = teamResults(ss, s.tid).slice().sort(function(a,b){ return a[0]-b[0]; });
+  var res = playerResults(ss, s);
   var miss = missedWeeks(p, y), r = seeded(p.id, y);
   var played = res.filter(function(g){ return !miss[g[0]]; });
   if(played.length > s.gp) played = played.slice(0, s.gp);
@@ -3407,8 +3716,8 @@ function gameLines(p, y){
   var off = SIDE[p.pos]==='off';
   var w = played.map(function(g){
     var pts = g[3], opp = g[4];
-    var base = off ? 1 + (pts-23)/23*0.55 : 1 + (opp-21)/21*0.15;
-    return Math.max(0.12, base + sN(r, 0, .32));
+    var base = off ? 1 + (pts-23)/23*0.4 : 1 + (opp-21)/21*0.12;
+    return clamp(base + sN(r, 0, .24), .45, 1.6);
   });
   var lines = {}; played.forEach(function(g){ lines[g[0]] = {}; });
   SPLIT_KEYS.forEach(function(k){
@@ -3436,9 +3745,14 @@ function playoffLine(p, y, gameId, teamPts){
   if(L.punts && s.pavg) L.pavg = s.pavg;
   return L;
 }
-function teamPlayersIn(y, tid){ return S.players.filter(function(p){ var s=statsOf(p, y); return s && s.tid===tid && s.gp; }); }
+function playerResults(ss, s){
+  if(!s.split) return teamResults(ss, s.tid).slice().sort(function(a,b){ return a[0]-b[0]; });
+  return teamResults(ss, s.split.tid).filter(function(g){ return g[0] <= s.split.wk; }).concat(teamResults(ss, s.tid).filter(function(g){ return g[0] > s.split.wk; })).sort(function(a,b){ return a[0]-b[0]; });
+}
+function tidInWeek(s, wk){ return s.split && wk!=null && wk <= s.split.wk ? s.split.tid : s.tid; }
+function teamPlayersIn(y, tid, wk){ return S.players.filter(function(p){ var s=statsOf(p, y); return s && s.gp && (wk==null ? s.tid===tid : tidInWeek(s, wk)===tid); }); }
 function boxScoreSide(y, tid, wk, playoffGame, pts){
-  var list = teamPlayersIn(y, tid).map(function(p){
+  var list = teamPlayersIn(y, tid, playoffGame!=null ? null : wk).map(function(p){
     var L = playoffGame!=null ? playoffLine(p, y, playoffGame, pts) : (gameLines(p, y)[wk]);
     return L ? {p:p, L:L} : null;
   }).filter(Boolean);
@@ -4281,6 +4595,52 @@ function powerRank(ss, wk){
     var blend = gp>=4 ? pw : (pw*gp + (prior[t.id]||5)*(4-gp))/4;
     return {id:t.id, r:r, v:blend}; }).sort(function(a,b){ return b.v-a.v; });
 }
+/* ---------- weekly game log on the player card ---------- */
+function weeklyLog(p){
+  var years = Object.keys(p.stats).map(Number).filter(function(y){ return p.stats[y] && p.stats[y].gp; });
+  if(S.live && S.live.st[p.id] && S.live.st[p.id].gp && years.indexOf(S.live.y)<0) years.push(S.live.y);
+  years.sort(function(a,b){ return b-a; });
+  if(!years.length) return '';
+  UI.glY = UI.glY || {};
+  var y = UI.glY[p.id] && years.indexOf(UI.glY[p.id])>=0 ? UI.glY[p.id] : years[0];
+  var s = statsOf(p, y), ss = seasonOrLive(y); if(!s || !ss) return '';
+  var lastWk = (ss.live || (S.live && S.live.y===y)) ? S.live.wk : 99;
+  var res = playerResults(ss, s).filter(function(g){ return g[0] <= lastWk; });
+  var lines = gameLines(p, y), miss = missedWeeks(p, y), maxW = res.length ? Math.max.apply(null, res.map(function(g){return g[0];})) : 0;
+  var byWk = {}; res.forEach(function(g){ byWk[g[0]] = g; });
+  function v(x){ return x==null||x===0 ? '<span class="muted">0<\/span>' : x; }
+  var C;
+  switch(p.pos){
+    case 'QB': C = [['C/ATT',function(L){ return (L.cmp||0)+'/'+(L.att||0); }],['YDS',function(L){ return v(L.pyds); }],['TD',function(L){ return v(L.ptd); }],['INT',function(L){ return v(L.int); }],['RTG',function(L){ return L.att? passerRating(L.cmp||0,L.att,L.pyds||0,L.ptd||0,L.int||0).toFixed(1) : '—'; }],['RUSH',function(L){ return v(L.ryds); }],['R TD',function(L){ return v(L.rtd); }]]; break;
+    case 'RB': C = [['CAR',function(L){ return v(L.car); }],['YDS',function(L){ return v(L.ryds); }],['TD',function(L){ return v(L.rtd); }],['REC',function(L){ return v(L.rec); }],['REC YDS',function(L){ return v(L.recyds); }],['REC TD',function(L){ return v(L.rectd); }],['FUM',function(L){ return v(L.fum); }]]; break;
+    case 'WR': case 'TE': C = [['TGT',function(L){ return v(L.tgt); }],['REC',function(L){ return v(L.rec); }],['YDS',function(L){ return v(L.recyds); }],['AVG',function(L){ return L.rec ? (L.recyds/L.rec).toFixed(1) : '—'; }],['TD',function(L){ return v(L.rectd); }],['RUSH',function(L){ return v(L.ryds); }]]; break;
+    case 'K': C = [['FG',function(L){ return (L.fgm||0)+'/'+(L.fga||0); }],['XP',function(L){ return (L.xpm||0)+'/'+(L.xpa||0); }],['PTS',function(L){ return (L.fgm||0)*3+(L.xpm||0); }]]; break;
+    case 'P': C = [['PUNTS',function(L){ return v(L.punts); }],['AVG',function(L){ return L.pavg || '—'; }],['IN 20',function(L){ return v(L.in20); }]]; break;
+    case 'OT': case 'OG': case 'C': C = []; break;
+    default: C = [['TKL',function(L){ return v(L.tkl); }],['SACK',function(L){ return v(L.sck); }],['TFL',function(L){ return v(L.tfl); }],['QB HIT',function(L){ return v(L.qbh); }],['INT',function(L){ return v(L.int); }],['PD',function(L){ return v(L.pd); }],['FF',function(L){ return v(L.ff); }]];
+  }
+  // fantasy points per game, same scoring as the Season Stats fantasy view
+  if(C.length && p.pos!=='P'){
+    C.push(['FPTS', function(L){ var o = {gp:1}; for(var k in L) o[k] = L[k]; if(p.pos==='QB') o.att = o.att||0; else delete o.att; if(p.pos==='K') o.fgm = o.fgm||0; else delete o.fgm; if(SIDE[p.pos]==='def') o.tkl = o.tkl||0; else delete o.tkl; return '<b class="glfp">'+fpts(o).toFixed(1)+'<\/b>'; }]);
+  }
+  var tot = {}, gp = 0, rows = '';
+  for(var w=1; w<=maxW; w++){
+    var g = byWk[w];
+    if(!g){ rows += '<tr class="glbye"><td>'+w+'<\/td><td colspan="'+(2+C.length+(C.length?0:1))+'" class="muted">Bye week<\/td><\/tr>'; continue; }
+    var res1 = g[3]>g[4]?'W':g[3]<g[4]?'L':'T', opp = teamById(g[1]);
+    var myT = tidInWeek(s, w);
+    var head = '<td>'+w+'<\/td><td><span class="muted">'+(g[2]?'vs':'@')+'<\/span> '+tLink(opp.id)+(s.split?' <span class="muted small">('+teamById(myT).abbr+')<\/span>':'')+'<\/td><td><button class="gl-res '+res1.toLowerCase()+'" data-game="'+y+'" data-wk="'+w+'" data-h="'+(g[2]?myT:g[1])+'" data-a="'+(g[2]?g[1]:myT)+'">'+res1+' '+g[3]+'-'+g[4]+'<\/button><\/td>';
+    var L = lines[w];
+    if(!L){ rows += '<tr class="glout">'+head+'<td colspan="'+Math.max(1,C.length)+'" class="muted">'+(miss[w] ? (s.holdout && w<=s.holdout ? 'Holdout' : 'Out — injured') : 'Did not play')+'<\/td><\/tr>'; continue; }
+    gp++; for(var k in L){ if(k!=='pavg') tot[k] = (tot[k]||0) + L[k]; }
+    rows += '<tr>'+head+(C.length ? C.map(function(c){ return '<td class="n">'+c[1](L)+'<\/td>'; }).join('') : '<td class="muted">'+(s.gs? 'Started' : 'Played')+'<\/td>')+'<\/tr>';
+  }
+  if(p.pos==='P' && s.pavg) tot.pavg = s.pavg;
+  var foot = '<tr class="gltot"><td colspan="3"><b>Season'+(lastWk<99?' so far':'')+'<\/b> <span class="muted small">'+gp+' game'+(gp===1?'':'s')+'<\/span><\/td>'+(C.length ? C.map(function(c){ return '<td class="n"><b>'+c[1](tot)+'<\/b><\/td>'; }).join('') : '<td><\/td>')+'<\/tr>';
+  var pills = years.length>1 ? '<div class="row" style="gap:6px;margin-bottom:8px">'+years.slice(0,12).map(function(yy){ return '<button class="pill'+(yy===y?' on':'')+'" data-glyear="'+p.id+'|'+yy+'">'+yy+'<\/button>'; }).join('')+'<\/div>' : '';
+  return '<h3>Week-by-week stats<\/h3>'+pills+'<div class="small muted" style="margin:-2px 0 6px">'+y+' regular season with '+(s.split ? esc(teamById(s.split.tid).abbr)+' (Weeks 1-'+s.split.wk+') and '+esc(teamById(s.tid).abbr)+' (traded at the deadline)' : esc(teamById(s.tid).city+' '+teamById(s.tid).name))+'. Click a score for the box score.'+(C.length && p.pos!=='P' ? ' FPTS = fantasy points (PPR'+(SIDE[p.pos]==='def'?', IDP':'')+').' : '')+'<\/div>'+
+    '<div class="tablewrap"><table class="gamelogtbl"><thead><tr><th class="nosort">Wk<\/th><th class="nosort">Opponent<\/th><th class="nosort">Result<\/th>'+(C.length ? C.map(function(c){ return '<th class="nosort n">'+c[0]+'<\/th>'; }).join('') : '<th class="nosort"><\/th>')+'<\/tr><\/thead><tbody>'+rows+foot+'<\/tbody><\/table><\/div>';
+}
 function lineOf(p, y, wk){ var L = gameLines(p, y)[wk]; return L || null; }
 function lineFpts(L){ return (L.pyds||0)/25 + (L.ptd||0)*4 - (L.int||0)*2 + (L.ryds||0)/10 + (L.rtd||0)*6 + (L.rec||0) + (L.recyds||0)/10 + (L.rectd||0)*6 - (L.fum||0)*2; }
 function lineDef(L){ return (L.sck||0)*4 + (L.int||0)*5 + (L.tkl||0)*.7 + (L.ff||0)*3 + (L.pd||0)*1.2 + (L.tfl||0); }
@@ -4403,8 +4763,10 @@ function startLiveSeason(){
 function simWeeks(toWeek){
   startLiveSeason();
   var L = S.live; L.wk = Math.min(17, toWeek==null ? L.wk+1 : toWeek); GLCACHE = {};
+  var dlNow = L.dl && !L.dl.applied && L.wk >= DEADLINE_WK;
+  if(dlNow){ NEWS_Y = L.y; applyDeadline(L); NEWS_Y = null; refreshTeamRatings(); }
   persist(); render();
-  toast('Week '+L.wk+' is done.'+(L.wk>=17?' The regular season is over — play the playoffs when ready.':''));
+  toast('Week '+L.wk+' is done.'+(dlNow && L.dl.plan.length ? ' The trade deadline passed: '+L.dl.plan.length+' deal'+(L.dl.plan.length>1?'s':'')+' — see News.' : dlNow ? ' The trade deadline passed quietly.' : '')+(L.wk>=17?' The regular season is over — play the playoffs when ready.':''));
 }
 
 /* =====================================================================
@@ -4521,8 +4883,8 @@ function devHistHTML(p){
 var SKINS = ['#f6d7c3','#eec4a6','#e0ac85','#c98e62','#b0764c','#8d5a36','#6e4428','#57351f','#43291a'];
 var HAIRC = ['#141010','#1d1510','#2a1c12','#3b2616','#5a3a1e','#7a5230','#a3743f','#c99a5b','#8a3b1c'];
 var EYEC = ['#2a1a10','#3b2416','#4a3020','#2c3b4a','#3e5a3a','#5a4a2a'];
-var HAIR_TEXTURED = ['afro','locs','waves','braids','twists','frohawk','freeform','cornrows','highlocs','flat','curly','fade','buzz','bald','buzzline','taper','sponge','shortlocs','blowout','designfade','caesar','puff','curlytop','buzzfade','topknot','waves','fade','sponge','twa','lowcut','twa','lowcut'];
-var HAIR_STRAIGHT = ['short','sidepart','pompadour','crew','spiky','slickback','mullet','manbun','curtains','shaggy','fade','buzz','bald','taper','quiff','ivy','undercut','frenchcrop','flow','messy','buzzfade','curlytop','topknot','caesar','frenchcrop','flow','combover','brushup','mediumwavy','ivy','short','sidepart'];
+var HAIR_TEXTURED = ['afro','locs','waves','braids','twists','frohawk','freeform','cornrows','highlocs','flat','curly','fade','buzz','bald','buzzline','taper','sponge','shortlocs','blowout','designfade','caesar','puff','curlytop','buzzfade','topknot','waves','fade','sponge','twa','lowcut','twa','lowcut','halfup','boxbraids','shapeup','twistout','bunlocs','zigzag','shapeup','twistout'];
+var HAIR_STRAIGHT = ['short','sidepart','pompadour','crew','spiky','slickback','mullet','manbun','curtains','shaggy','fade','buzz','bald','taper','quiff','ivy','undercut','frenchcrop','flow','messy','buzzfade','curlytop','topknot','caesar','frenchcrop','flow','combover','brushup','mediumwavy','ivy','short','sidepart','texturedfringe','sidesweep','pompfade','texturedfringe','sidesweep'];
 var HAIR_STYLES = HAIR_TEXTURED.concat(HAIR_STRAIGHT);
 var BEARDS = ['none','none','none','stubble','stubble','goatee','full','mustache','chin','short','chinstrap','horseshoe','soul','thick','short','goatee'];
 var HATS = ['skullcap','durag','beanie','bandana','backcap'];
@@ -4555,7 +4917,8 @@ function looks(p){
   var race = raceFor(p), rr = r();
   var skinI = race==='white' ? Math.floor(rr*3) : race==='asian' ? 1+Math.floor(rr*2) : race==='brown' ? 2+Math.floor(rr*3) : 4+Math.floor(rr*5);
   var dark = skinI >= 4;
-  var hairI = dark ? Math.floor(r()*3) : Math.floor(r()*HAIRC.length);
+  var hr0 = r(), hairI = dark ? Math.floor(hr0*3) : race==='asian' ? Math.floor(hr0*2) : race==='brown' ? Math.floor(hr0*4) :
+    (hr0 < .5 ? Math.floor(hr0*8) : hr0 < .8 ? 4 + Math.floor((hr0-.5)*6.6) : hr0 < .93 ? 6 : hr0 < .975 ? 7 : 8);   // mostly dark/brown, some light brown, few blond, rare red
   var textured = race==='black' || (race==='brown' && rr < .35);
   var style = r() < .88 ? k(textured ? HAIR_TEXTURED : HAIR_STRAIGHT) : k(HAIR_STYLES);
   if(age0(p) >= 33 && (style==='spiky'||style==='frohawk') && r()<.6) style = 'short';
@@ -4564,19 +4927,22 @@ function looks(p){
     skin:SKINS[skinI], hair:HAIRC[hairI], eye:EYEC[dark?Math.floor(r()*3):Math.floor(r()*EYEC.length)],
     style:style, beard:k(BEARDS), brow:Math.floor(r()*3), mouth:Math.floor(r()*4), nose:Math.floor(r()*3),
     eyeShape:Math.floor(r()*3), jaw:r(), cheek:r(), headband:r()<.08, eyeBlack:r()<.22, earring:r()<.12, sleeve:r()<.3, tattoo:r()<.28,
-    dye:r()<.07 ? ['#e8d28a','#f4f1e6','#c0392b','#2f80ed'][Math.floor(r()*4)] : null,
+    dye:r()<.015 ? ['#e8d28a','#e8d28a','#f4f1e6','#c0392b','#2f80ed'][Math.floor(r()*5)] : null,
     gloves:r()<.6, cleat:k(['#111','#f4f4f4','#111','#c8102e','#ffb400','#1d4ed8'])
   };
   var q = seeded(p.id*71+13, 2468), qk = function(a){ return a[Math.floor(q()*a.length)]; };
   L.fwAdj = (q()-.5)*9; L.eyeS = .88 + q()*.26; L.lipFull = q(); L.earS = .85 + q()*.3; L.browT = .85 + q()*.4;
   var hr = q();
-  L.hat = hr < .07 ? 'skullcap' : hr < .13 ? (textured ? 'durag' : 'bandana') : hr < .17 ? 'beanie' : hr < .2 ? 'bandana' : hr < .235 ? 'backcap' : null;
+  L.hat = hr < .04 ? 'skullcap' : hr < .08 ? (textured ? 'durag' : 'backcap') : hr < .1 ? 'beanie' : hr < .115 ? 'bandana' : hr < .14 ? 'backcap' : null;
   if(L.hat) L.headband = false;
-  L.hatC = qk(['#111827','#1f2937','#4b5563','#7f1d1d','#1e3a8a','#e5e7eb','team','team','#0f172a']);
+  L.hatC = qk(['#111827','#111827','#111827','#1f2937','#1f2937','#4b5563','#0f172a','#1e293b','#e5e7eb','team']);
   L.earring = q() < (textured ? .3 : .16) ? qk(EARRINGS) : null; L.earBoth = q() < .55; L.gold = q() < .45;
   L.browSlit = q() < .09; L.freckles = skinI <= 1 && q() < .28; L.faceTat = q() < .035 ? qk(['tear','star','cross']) : null;
-  L.grill = L.mouth===2 && q() < .25;
-  L.bleach = (style==='buzz'||style==='fade'||style==='sponge'||style==='buzzfade'||style==='curlytop') && q() < .12;
+  L.grill = L.mouth===2 && q() < .12;
+  L.faceLen = (q()-.5)*9; L.noseT = Math.floor(q()*5); L.lid = qk(['','','','hooded','deep','']); L.dimples = q() < .15; L.cleft = q() < .14; L.mole = q() < .1 ? [(q()-.5)*40, q()*20] : null;
+  L.scar = q() < .05; L.cheekbones = q() < .3; L.browGap = q()*4;
+  if(age0(p) >= 30 && !textured && (style==='short'||style==='sidepart'||style==='crew'||style==='slickback') && q() < .35) L.style = style = 'receding';
+  L.bleach = (style==='buzz'||style==='fade'||style==='sponge'||style==='buzzfade'||style==='curlytop') && q() < .035;
   if(L.bleach) L.hair = '#e3c983';
   LKC[p.id] = L; return L;
 }
@@ -4674,7 +5040,7 @@ function hatSvg(L, cx, fw, top, hl, id, jc, P, cap, hair){
   var cuffTop = hl-3, cuff = 'M'+(cx-fw/2-1.5)+' '+(hl+12)+' C'+(cx-22)+' '+(cuffTop-2)+' '+(cx+22)+' '+(cuffTop-2)+' '+(cx+fw/2+1.5)+' '+(hl+12)+' L'+(cx+fw/2+1.5)+' '+(hl+1)+' C'+(cx+22)+' '+(cuffTop-14)+' '+(cx-22)+' '+(cuffTop-14)+' '+(cx-fw/2-1.5)+' '+(hl+1)+'Z';
   return '<defs><pattern id="'+kid+'" width="4" height="6" patternUnits="userSpaceOnUse"><path d="M1 0 V6" stroke="'+cd+'" stroke-width="1.3" opacity=".55"/></pattern></defs>'+
     P(k, c) + P(k, 'url(#'+kid+')') + '<ellipse cx="'+(cx-12)+'" cy="'+(top+4)+'" rx="14" ry="9" fill="'+cl+'" opacity=".35"/>' +
-    (L.hat==='beanie' ? P(cuff, cd) + P(cuff, 'url(#'+kid+')') : '<path d="M'+(cx-fw/2+2)+' '+(hl+6)+' C'+(cx-20)+' '+(hl-6)+' '+(cx+20)+' '+(hl-6)+' '+(cx+fw/2-2)+' '+(hl+6)+'" stroke="'+cd+'" stroke-width="2" fill="none" opacity=".7"/>');
+    (L.hat==='beanie' || L.hat==='skullcap' ? P(cuff, cd) + P(cuff, 'url(#'+kid+')') + '<path d="M'+(cx-fw/2)+' '+(hl+1.5)+' C'+(cx-22)+' '+(cuffTop-13)+' '+(cx+22)+' '+(cuffTop-13)+' '+(cx+fw/2)+' '+(hl+1.5)+'" stroke="'+cl+'" stroke-width="1" fill="none" opacity=".5"/>' : '<path d="M'+(cx-fw/2+2)+' '+(hl+6)+' C'+(cx-20)+' '+(hl-6)+' '+(cx+20)+' '+(hl-6)+' '+(cx+fw/2-2)+' '+(hl+6)+'" stroke="'+cd+'" stroke-width="2" fill="none" opacity=".7"/>');
 }
 function playerSVG(p, full, size){
   var GM = FACE_STYLE==='gm' && !!window.FACESJS;
@@ -4692,7 +5058,7 @@ function playerSVG(p, full, size){
   var cx = 100;
   var fw = 66 + B.mass*10 + L.cheek*5 + (L.fwAdj||0);                 // cheekbone width
   var jw = fw*(.88 + L.jaw*.1 + B.mass*.06);          // jaw width (broad, square male jaw)
-  var top = 40, browY = 83, ey = 93, ny = 112, my = 125, chin = 141 + L.jaw*2;
+  var fl = L.faceLen||0, top = 40, browY = 83, ey = 93, ny = 112 + fl*.35, my = 125 + fl*.6, chin = 141 + L.jaw*2 + fl;
   var neck = 21 + B.mass*14 + (/OT|OG|C|DL|EDGE|LB/.test(p.pos)?4:0);
   var o = [], defs = [];
   function P(d, f, x){ return '<path d="'+d+'" fill="'+f+'"'+(x?' '+x:'')+'/>'; }
@@ -4726,6 +5092,8 @@ function playerSVG(p, full, size){
   if(L.style==='blowout' && !L.hat) behind += '<ellipse cx="'+cx+'" cy="68" rx="'+(fw/2+10)+'" ry="34" fill="url(#'+id+'hr)"/><ellipse cx="'+cx+'" cy="68" rx="'+(fw/2+10)+'" ry="34" fill="url(#'+id+'cu)"/>';
   if(L.style==='mullet') behind += P('M'+(cx-fw/2+2)+' 84 C'+(cx-fw/2-4)+' 120 '+(cx-jw/2-4)+' 150 '+(cx-jw/2+4)+' 168 L'+(cx+jw/2-4)+' 168 C'+(cx+jw/2+4)+' 150 '+(cx+fw/2+4)+' 120 '+(cx+fw/2-2)+' 84Z', 'url(#'+id+'hr)');
   if(L.style==='freeform') for(var j=0;j<9;j++){ var aa = -1 + j/4, x1 = cx + aa*(fw/2); behind += '<path d="M'+x1+' 70 Q'+(x1+aa*10)+' 104 '+(x1+aa*8)+' 118" stroke="'+(j%2?hair:hairD)+'" stroke-width="8" stroke-linecap="round" fill="none"/>'; }
+  if((L.style==='boxbraids' || L.style==='halfup') && !L.hat) for(var bi=0;bi<12;bi++){ var ba = -1 + bi/5.5, bx = cx + ba*(fw/2+2), bl = (L.style==='halfup'?55:75) + r()*25; behind += '<path d="M'+bx+' 62 Q'+(bx+ba*12)+' '+(100+bl*.4)+' '+(bx+ba*9+(r()-.5)*6)+' '+(72+bl)+'" stroke="'+(bi%2?hair:hairD)+'" stroke-width="5.5" stroke-linecap="round" fill="none"/><path d="M'+bx+' 62 Q'+(bx+ba*12)+' '+(100+bl*.4)+' '+(bx+ba*9)+' '+(72+bl)+'" stroke="'+hairL+'" stroke-width="5.5" stroke-dasharray="1.5 3" fill="none" opacity=".35"/>'; }
+  if(L.style==='twistout' && !L.hat) behind += '<ellipse cx="'+cx+'" cy="74" rx="'+(fw/2+7)+'" ry="30" fill="url(#'+id+'hr)"/><ellipse cx="'+cx+'" cy="74" rx="'+(fw/2+7)+'" ry="30" fill="url(#'+id+'cu)"/>';
   if(L.style==='locs') for(var i=0;i<11;i++){ var a = -1 + i/5, x0 = cx + a*(fw/2+2), len = 70 + r()*30; behind += '<path d="M'+x0+' 60 Q'+(x0+a*14)+' '+(100+len*.4)+' '+(x0+a*10+(r()-.5)*8)+' '+(70+len)+'" stroke="'+(i%2?hair:hairD)+'" stroke-width="7.5" stroke-linecap="round" fill="none"/>'; }
   if(L.style==='long') behind += P('M'+(cx-fw/2-6)+' 70 C'+(cx-fw/2-14)+' 120 '+(cx-fw/2-6)+' 170 '+(cx-jw/2)+' 182 L'+(cx+jw/2)+' 182 C'+(cx+fw/2+6)+' 170 '+(cx+fw/2+14)+' 120 '+(cx+fw/2+6)+' 70Z', 'url(#'+id+'hr)');
   if(L.style==='afro' && !L.hat) behind += '<ellipse cx="'+cx+'" cy="62" rx="'+(fw/2+20)+'" ry="44" fill="url(#'+id+'hr)"/><ellipse cx="'+cx+'" cy="62" rx="'+(fw/2+20)+'" ry="44" fill="url(#'+id+'cu)"/>';
@@ -4905,10 +5273,14 @@ function playerSVG(p, full, size){
     var bw = [4.4,5.4,3.8][L.brow]*(L.browT||1), by = browY+1, arch = [1.6,.8,2.4][L.brow], bc = gray>.4 ? mixHex(L.hair,'#b9b6b0',gray*.7) : shade(L.hair,-.1);
     f.push(P('M'+(inner+s*1)+' '+(by+2)+' C'+(inner+s*4)+' '+(by-arch-bw)+' '+(outer-s*2)+' '+(by-arch-bw+1)+' '+(outer+s*3)+' '+(by+1)+' C'+(outer-s*3)+' '+(by-arch+1.5)+' '+(inner+s*5)+' '+(by-arch+2)+' '+(inner+s*1)+' '+(by+2+bw*.3)+'Z', bc, 'opacity=".95"'));
     if(L.browSlit && s>0) f.push('<path d="M'+(x+s*3)+' '+(by-arch-bw-1)+' L'+(x+s*1.5)+' '+(by+3)+' M'+(x+s*6)+' '+(by-arch-bw)+' L'+(x+s*4.5)+' '+(by+3)+'" stroke="'+S0+'" stroke-width="1.6"/>');
+    if(L.lid==='hooded') f.push(P('M'+(inner-s*1)+' '+(ey-eh+1)+' C'+(inner+s*4)+' '+(ey-eh-3)+' '+(outer-s*2)+' '+(ey-eh-3)+' '+(outer+s*1.5)+' '+(ey-.5)+' C'+(outer-s*3)+' '+(ey-eh+.5)+' '+(inner+s*4)+' '+(ey-eh+.5)+' '+(inner-s*1)+' '+(ey-eh+1)+'Z', S0, 'opacity=".9"'));
+    if(L.lid==='deep') f.push('<ellipse cx="'+x+'" cy="'+(ey-eh-2)+'" rx="'+(ew+2)+'" ry="3.5" fill="'+Sdd+'" opacity=".35" filter="url(#'+id+'bs)"/>');
+    if(age>=31) f.push('<path d="M'+(outer+s*2)+' '+(ey-2)+' l'+(s*4)+' -2 M'+(outer+s*2)+' '+(ey+1)+' l'+(s*4.5)+' 0 M'+(outer+s*2)+' '+(ey+3.5)+' l'+(s*4)+' 2" stroke="'+Sdd+'" stroke-width=".7" opacity="'+Math.min(.6,(age-30)*.1)+'"/>');
     if(L.eyeBlack) f.push(P('M'+(x-8)+' '+(ey+eh+5)+' L'+(x+8)+' '+(ey+eh+5)+' L'+(x+7)+' '+(ey+eh+11)+' L'+(x-7)+' '+(ey+eh+11)+'Z', '#0d0d0d', 'opacity=".9"'));
   });
   // nose
-  var nw = [7.5,9.5,6.5][L.nose] + B.mass*1.5 + (darkSkin?1.5:0);
+  var nw = [7.5,9.5,6.5,8.5,10.5][L.noseT!=null ? L.noseT : L.nose] + B.mass*1.5 + (darkSkin?1.5:0);
+  if(L.noseT===3) f.push('<path d="M'+(cx+1)+' '+(ey+6)+' q3 6 1 12" stroke="'+Sdd+'" stroke-width="1.6" fill="none" opacity=".5"/>');
   f.push('<path d="M'+(cx+3)+' '+(ey+2)+' C'+(cx+5)+' '+(ny-14)+' '+(cx+7)+' '+(ny-8)+' '+(cx+nw*.7)+' '+(ny-3)+'" stroke="'+Sdd+'" stroke-width="2.4" fill="none" opacity=".45" filter="url(#'+id+'bs)"/>');
   f.push('<ellipse cx="'+cx+'" cy="'+(ny-3)+'" rx="'+(nw*.5)+'" ry="4.5" fill="'+Shl+'" opacity=".45" filter="url(#'+id+'bs)"/>');
   [-1,1].forEach(function(s){ f.push('<path d="M'+(cx+s*nw*.35)+' '+(ny-7)+' C'+(cx+s*(nw+2))+' '+(ny-6)+' '+(cx+s*(nw+1))+' '+(ny+2)+' '+(cx+s*nw*.45)+' '+(ny+1.5)+'" stroke="'+Sdd+'" stroke-width="1.5" fill="none" opacity=".75"/>'); f.push('<ellipse cx="'+(cx+s*nw*.42)+'" cy="'+(ny+.5)+'" rx="2.4" ry="1.4" fill="#2a1712" opacity=".7" transform="rotate('+(s*-18)+' '+(cx+s*nw*.42)+' '+(ny+.5)+')"/>'); });
@@ -4945,6 +5317,11 @@ function playerSVG(p, full, size){
   if(L.faceTat){ var tx0 = cx - ex - 2, ty0 = ey + 10; f.push(L.faceTat==='tear' ? '<path d="M'+tx0+' '+ty0+' q-2 4 0 5.5 q2 -1.5 0 -5.5Z" fill="#1e293b" opacity=".75"/>' : L.faceTat==='star' ? '<path d="M'+(tx0-6)+' '+(ty0)+' l1.2 2.6 2.8 .3 -2.1 1.9 .6 2.8 -2.5 -1.4 -2.5 1.4 .6 -2.8 -2.1 -1.9 2.8 -.3Z" fill="#1e293b" opacity=".7"/>' : '<path d="M'+(tx0+fw*.1)+' '+(ty0-14)+' v6 M'+(tx0+fw*.1-2)+' '+(ty0-12)+' h4" stroke="#1e293b" stroke-width="1.1" opacity=".75"/>'); }
   f.push('<ellipse cx="'+cx+'" cy="'+(my+3.5)+'" rx="'+(mw*.45)+'" ry="1.4" fill="#fff" opacity=".18"/>');
   f.push('<ellipse cx="'+cx+'" cy="'+(my+10)+'" rx="'+(mw*.6)+'" ry="3" fill="'+Sdd+'" opacity=".35" filter="url(#'+id+'bs)"/>');
+  if(L.dimples) [-1,1].forEach(function(s){ f.push('<path d="M'+(cx+s*(mw+4))+' '+(my-2)+' q'+(s*1.5)+' 3 0 5" stroke="'+Sdd+'" stroke-width="1" fill="none" opacity=".55"/>'); });
+  if(L.cleft && !/full|thick|goatee|chin|horseshoe/.test(L.beard)) f.push('<path d="M'+cx+' '+(chin-6)+' l0 4" stroke="'+Sdd+'" stroke-width="1.3" opacity=".5"/>');
+  if(L.cheekbones) [-1,1].forEach(function(s){ f.push('<ellipse cx="'+(cx+s*(fw/2-9))+'" cy="'+(ny-4)+'" rx="6" ry="9" fill="'+Sdd+'" opacity=".16" filter="url(#'+id+'bs)"/>'); });
+  if(L.mole) f.push('<circle cx="'+(cx+L.mole[0])+'" cy="'+(ny-6+L.mole[1])+'" r="1.1" fill="'+mixHex(Sdd,'#2a1a10',.5)+'" opacity=".8"/>');
+  if(L.scar) f.push('<path d="M'+(cx+fw*.28)+' '+(ey+8)+' l5 9" stroke="'+Shl+'" stroke-width="1.4" opacity=".7"/>');
   if(age >= 34) f.push('<path d="M'+(cx-16)+' 66 q8 -2 16 0 t16 0 M'+(cx-12)+' 72 q6 -1.5 12 0 t12 0" stroke="'+Sd+'" stroke-width=".9" fill="none" opacity=".55"/>');
 
   // ---------- hair on top ----------
@@ -4982,6 +5359,16 @@ function playerSVG(p, full, size){
     case 'mediumwavy': hs = P(cap(10, hl-2, 98), 'url(#'+id+'hr)') + P(cap(10, hl-2, 98), 'url(#'+id+'tx)') + [0,1,2].map(function(i){ return '<path d="M'+(cx-fw/2+6)+' '+(top+2+i*8)+' q8 -6 16 0 t16 0 t16 0 t16 0" stroke="'+hairD+'" stroke-width="1.4" fill="none" opacity=".5"/>'; }).join(''); break;
     case 'twa': hs = P(cap(7), 'url(#'+id+'hr)') + P(cap(7), 'url(#'+id+'cu)'); break;
     case 'lowcut': hs = P(cap(2, hl+1, 88), hair, 'opacity=".8"') + P(cap(2, hl+1, 88), 'url(#'+id+'st)') + P(cap(2, hl+1, 88), 'url(#'+id+'cu)', 'opacity=".4"'); break;
+    case 'halfup': hs = P(cap(6), 'url(#'+id+'hr)') + [-20,-10,0,10,20].map(function(d){ return '<path d="M'+(cx+d)+' '+(hl+2)+' Q'+(cx+d*.6)+' '+(top+2)+' '+cx+' '+(top-10)+'" stroke="'+hairD+'" stroke-width="3" fill="none" opacity=".7"/>'; }).join('') + '<ellipse cx="'+cx+'" cy="'+(top-13)+'" rx="11" ry="8" fill="'+hair+'"/><path d="M'+(cx-9)+' '+(top-16)+' q9 -6 18 0 M'+(cx-9)+' '+(top-11)+' q9 -6 18 0" stroke="'+hairD+'" stroke-width="2" fill="none"/>'; break;
+    case 'boxbraids': hs = P(cap(4), hair) + [-27,-18,-9,0,9,18,27].map(function(d){ return '<path d="M'+(cx+d*.85)+' '+(hl+2)+' C'+(cx+d)+' '+(top+12)+' '+(cx+d*1.05)+' '+(top)+' '+(cx+d*.9)+' '+(top-8)+'" stroke="'+hairL+'" stroke-width="2.2" stroke-dasharray="2 1.6" fill="none" opacity=".7"/>'; }).join(''); break;
+    case 'shapeup': hs = P(cap(3, hl+1, 88), hair, 'opacity=".9"') + P(cap(3, hl+1, 88), 'url(#'+id+'cu)', 'opacity=".5"') + '<path d="M'+(cx-fw/2+4)+' '+(hl+12)+' L'+(cx-fw/2+7)+' '+(hl+2)+' L'+(cx-14)+' '+(hl)+' L'+(cx+14)+' '+(hl)+' L'+(cx+fw/2-7)+' '+(hl+2)+' L'+(cx+fw/2-4)+' '+(hl+12)+'" stroke="'+hairD+'" stroke-width="1.6" fill="none"/>'; break;
+    case 'twistout': hs = P(cap(12), 'url(#'+id+'hr)') + Array.apply(null,{length:11}).map(function(_,i){ var x = cx - fw/2 + 5 + i*(fw-10)/10; return '<circle cx="'+x+'" cy="'+(top-8+Math.abs(i-5)*2.4)+'" r="7.5" fill="'+(i%2?hair:hairD)+'"/><circle cx="'+x+'" cy="'+(top-8+Math.abs(i-5)*2.4)+'" r="7.5" fill="url(#'+id+'cu)"/>'; }).join(''); break;
+    case 'bunlocs': hs = P(cap(5), hair) + [-24,-16,-8,0,8,16,24].map(function(d){ return '<path d="M'+(cx+d)+' '+(hl+3)+' Q'+(cx+d*.7)+' '+(top+4)+' '+(cx+d*.2)+' '+(top-8)+'" stroke="'+(Math.abs(d)%16?hairD:hairL)+'" stroke-width="4.5" stroke-linecap="round" fill="none" opacity=".85"/>'; }).join('') + '<circle cx="'+cx+'" cy="'+(top-14)+'" r="12" fill="'+hair+'"/><path d="M'+(cx-10)+' '+(top-18)+' q10 8 20 0 M'+(cx-11)+' '+(top-12)+' q11 7 22 0" stroke="'+hairD+'" stroke-width="3" fill="none"/>'; break;
+    case 'zigzag': hs = P(cap(1), hair) + [-24,-12,0,12,24].map(function(d){ var x = cx+d*.9; return '<path d="M'+x+' '+(hl+2)+' l-4 -6 l4 -6 l-4 -6 l4 -6 l-4 -6 l4 -6" stroke="'+hairL+'" stroke-width="2.6" stroke-dasharray="2.5 1.5" fill="none" opacity=".75"/><path d="M'+(x+4)+' '+(hl+2)+' l-4 -6 l4 -6 l-4 -6 l4 -6 l-4 -6 l4 -6" stroke="'+S0+'" stroke-width=".9" fill="none" opacity=".55"/>'; }).join(''); break;
+    case 'texturedfringe': hs = P(cap(6, hl+5, 84), 'url(#'+id+'hr)') + P(cap(6, hl+5, 84), 'url(#'+id+'tx)') + P(cap(0, hl+4, 90), hair, 'opacity=".25"') + Array.apply(null,{length:8}).map(function(_,i){ var x = cx - 24 + i*7; return P('M'+(x-3)+' '+(hl+2)+' L'+(x+1)+' '+(hl+9+(i%2)*2)+' L'+(x+4)+' '+(hl+2)+'Z', i%2?hair:hairD); }).join(''); break;
+    case 'sidesweep': hs = P(cap(8, hl, 88), 'url(#'+id+'hr)') + P('M'+(cx-fw/2+4)+' '+(hl+12)+' C'+(cx-20)+' '+(hl-2)+' '+(cx+4)+' '+(hl-4)+' '+(cx+fw/2-2)+' '+(hl+6)+' L'+(cx+fw/2-2)+' '+(hl-4)+' C'+(cx+4)+' '+(hl-12)+' '+(cx-20)+' '+(hl-10)+' '+(cx-fw/2+4)+' '+(hl+2)+'Z', 'url(#'+id+'hr)') + P(cap(8, hl, 88), 'url(#'+id+'tx)'); break;
+    case 'pompfade': hs = P(cap(0, hl+3, 92), hair, 'opacity=".28"') + P('M'+(cx-fw/2+7)+' '+(hl+6)+' C'+(cx-fw/2+4)+' '+(top-12)+' '+(cx+6)+' '+(top-20)+' '+(cx+fw/2-6)+' '+(top-6)+' C'+(cx+fw/2-3)+' '+(hl-2)+' '+(cx+16)+' '+(hl-5)+' '+(cx-fw/2+7)+' '+(hl+6)+'Z', 'url(#'+id+'hr)') + P('M'+(cx-fw/2+7)+' '+(hl+6)+' C'+(cx-fw/2+4)+' '+(top-12)+' '+(cx+6)+' '+(top-20)+' '+(cx+fw/2-6)+' '+(top-6)+'Z', 'url(#'+id+'tx)'); break;
+    case 'receding': hs = P(cap(5, hl+9, 84), 'url(#'+id+'hr)') + P(cap(5, hl+9, 84), 'url(#'+id+'tx)') + [-1,1].map(function(s){ return '<path d="M'+(cx+s*14)+' '+(hl+10)+' Q'+(cx+s*20)+' '+(hl)+' '+(cx+s*24)+' '+(hl+2)+' L'+(cx+s*26)+' '+(hl+12)+'Z" fill="'+S0+'"/>'; }).join(''); break;
     case 'sponge': hs = P(cap(7), 'url(#'+id+'hr)') + Array.apply(null,{length:22}).map(function(_,i){ var row = Math.floor(i/8), j = i%8, x = cx - fw/2 + 9 + j*(fw-18)/7 + (row%2?3:0), y = top + 1 + row*8 + Math.abs(j-3.5)*1.4; return '<circle cx="'+x+'" cy="'+y+'" r="3.4" fill="'+(j%2?hairD:hair)+'"/><circle cx="'+(x-.8)+'" cy="'+(y-1)+'" r="1.1" fill="'+hairL+'" opacity=".5"/>'; }).join('') + P(cap(0, hl+3, 90), hair, 'opacity=".3"'); break;
     case 'shortlocs': hs = P(cap(5), 'url(#'+id+'hr)') + Array.apply(null,{length:13}).map(function(_,i){ var x = cx - fw/2 + 7 + i*(fw-14)/12, y = top + Math.abs(i-6)*1.8; return '<path d="M'+x+' '+(y+12)+' q'+((i%2)?2:-2)+' -7 0 -15" stroke="'+(i%2?hair:hairD)+'" stroke-width="5" stroke-linecap="round" fill="none"/>'; }).join(''); break;
     case 'blowout': hs = P(cap(10), 'url(#'+id+'hr)') + P(cap(10), 'url(#'+id+'cu)'); break;
@@ -5059,9 +5446,9 @@ function depthOf(tid){
   return d;
 }
 function fieldChip(p, x, y, lab){
-  if(!p) return '<div class="fchip empty" style="left:'+x+'%;top:'+y+'%"><div class="fpos">'+lab+'<\/div><div class="small muted">—<\/div><\/div>';
+  if(!p) return '<div class="fchip empty" style="left:'+x+'%;top:'+y+'%"><div class="fcard"><div class="fmeta"><span class="fpos">'+lab+'<\/span><span class="fage">—<\/span><\/div><\/div><\/div>';
   var last = p.name.replace(/\s+(Jr\.|II|III|IV)$/,'').split(' ').slice(-1)[0];
-  return '<div class="fchip" data-player="'+p.id+'" style="left:'+x+'%;top:'+y+'%" title="'+esc(p.name)+' · '+p.pos+' · '+p.ovr+'">'+headshot(p, 38)+'<div class="fname">'+esc(last)+'<\/div><div class="frow"><span class="fpos">'+lab+'<\/span>'+ovrBadge(p.ovr)+'<\/div><\/div>';
+  return '<div class="fchip" data-player="'+p.id+'" style="left:'+x+'%;top:'+y+'%" title="'+esc(p.name)+' · '+p.pos+' · rated '+p.ovr+' · age '+p.age+'">'+headshot(p, 38)+'<div class="fcard"><div class="fname">'+esc(last)+'<\/div><div class="fmeta"><span class="fpos">'+lab+'<\/span>'+ovrBadge(p.ovr)+'<span class="fage">'+p.age+'y<\/span><\/div><\/div><\/div>';
 }
 function fieldView(tid, side){
   var d = depthOf(tid), g = function(pos, i){ return (d[pos]||[])[i]; };
@@ -5069,7 +5456,7 @@ function fieldView(tid, side){
   for(var i=1;i<10;i++) h += '<div class="yl" style="top:'+(i*10)+'%"><\/div>';
   if(side==='off'){
     h += '<div class="flabel">Offense · '+esc((teamById(tid).oc||{}).scheme||'')+'<\/div>';
-    h += fieldChip(g('WR',0), 7, 30, 'WR1') + fieldChip(g('WR',2), 18, 46, 'SLOT') + fieldChip(g('OT',0), 30, 30, 'LT') + fieldChip(g('OG',0), 40, 34, 'LG') + fieldChip(g('C',0), 50, 30, 'C') + fieldChip(g('OG',1), 60, 34, 'RG') + fieldChip(g('OT',1), 70, 30, 'RT') + fieldChip(g('TE',0), 81, 36, 'TE') + fieldChip(g('WR',1), 93, 30, 'WR2') + fieldChip(g('QB',0), 50, 58, 'QB') + fieldChip(g('RB',0), 50, 82, 'RB');
+    h += fieldChip(g('WR',0), 7, 30, 'WR1') + fieldChip(g('WR',2), 18, 46, 'SLOT') + fieldChip(g('OT',0), 30, 27, 'LT') + fieldChip(g('OG',0), 40, 42, 'LG') + fieldChip(g('C',0), 50, 27, 'C') + fieldChip(g('OG',1), 60, 42, 'RG') + fieldChip(g('OT',1), 70, 27, 'RT') + fieldChip(g('TE',0), 81, 36, 'TE') + fieldChip(g('WR',1), 93, 30, 'WR2') + fieldChip(g('QB',0), 50, 57, 'QB') + fieldChip(g('RB',0), 50, 84, 'RB');
   } else {
     h += '<div class="flabel">Defense · '+esc((teamById(tid).dc||{}).scheme||'')+' (nickel)<\/div>';
     h += fieldChip(g('CB',0), 7, 70, 'CB1') + fieldChip(g('CB',2), 18, 52, 'NCB') + fieldChip(g('EDGE',0), 29, 70, 'EDGE') + fieldChip(g('DL',0), 43, 74, 'DT') + fieldChip(g('DL',1), 57, 74, 'DT') + fieldChip(g('EDGE',1), 71, 70, 'EDGE') + fieldChip(g('CB',1), 93, 70, 'CB2') + fieldChip(g('LB',0), 40, 46, 'LB') + fieldChip(g('LB',1), 60, 46, 'LB') + fieldChip(g('S',0), 33, 18, 'FS') + fieldChip(g('S',1), 67, 18, 'SS');
@@ -5094,8 +5481,55 @@ function lineupSection(tid){
 }
 
 /* ---------- team history & team Hall of Fame (Ring of Honor) ---------- */
+/* ---------- team page: last offseason's moves (draft, free agency, trades) ---------- */
+function teamMovesHTML(id, yIn){
+  if(!S.seasons.length && !S.players.some(function(p){ return p.draftTeamId===id && !p.vet; })) return '<div class="small muted" style="margin-top:12px">No moves yet — simulate a season first.</div>';
+  var t = teamById(id), full = t.city+' '+t.name;
+  var years = S.seasons.map(function(s){ return s.year; });
+  var y = yIn!=null && years.indexOf(yIn)>=0 ? yIn : (years.length ? years[years.length-1] : null);
+  var draftY = y!=null ? y+1 : S.year;
+  var h = '';
+  if(years.length > 1) h += '<div class="row" style="gap:6px;margin:12px 0 4px">'+years.slice().reverse().slice(0,10).map(function(yy){ return '<button class="pill'+(yy===y?' on':'')+'" data-tmoves="'+id+'|'+yy+'">After '+yy+'<\/button>'; }).join('')+'<\/div>';
+  function row(p, a, b){ return '<tr><td>'+pLink(p)+'<\/td><td><span class="badge">'+p.pos+'<\/span><\/td><td class="n">'+ovrBadge(p.ovr)+'<\/td><td class="n">'+p.age+'<\/td><td class="small">'+(a||'')+'<\/td>'+(b!=null?'<td class="small muted">'+b+'<\/td>':'')+'<\/tr>'; }
+  function table(title, rows, headA, headB, empty){
+    return '<div class="mvblock"><h4>'+title+' <span class="muted small">('+rows.length+')<\/span><\/h4>'+(rows.length ? '<table><thead><tr><th class="nosort">Player<\/th><th class="nosort">Pos<\/th><th class="nosort n">Now<\/th><th class="nosort n">Age<\/th><th class="nosort">'+headA+'<\/th>'+(headB?'<th class="nosort">'+headB+'<\/th>':'')+'<\/tr><\/thead><tbody>'+rows.join('')+'<\/tbody><\/table>' : '<div class="small muted">'+empty+'<\/div>')+'<\/div>';
+  }
+  function paren(txt){ var ct = /(\d+ yrs?, [^()]* total \([^()]*\))/.exec(txt); if(ct) return ct[1]; var all = txt.match(/\(([^()]*)\)/g) || [], c = all.filter(function(x){ return x.indexOf('$')>=0; }); return c.length ? c[c.length-1].slice(1,-1) : ''; }
+  // draft class
+  function classOf(dy){ return S.players.filter(function(p){ return !p.vet && p.draftYear===dy && p.draftTeamId===id && p.pick; }).sort(function(a,b){ return a.pick-b.pick; }); }
+  var dc = classOf(draftY), draftNote = '';
+  if(!dc.length && !S.players.some(function(p){ return !p.vet && p.draftYear===draftY; })){ draftNote = '<div class="small muted" style="margin:-2px 0 6px;text-transform:none;letter-spacing:0">The '+draftY+' draft hasn\'t happened yet, so this is the most recent one.<\/div>'; draftY = draftY-1; dc = classOf(draftY); }
+  var dr = dc.map(function(p){ var g = p.dr && p.dr.g; return row(p, 'Round '+p.round+', pick #'+p.pick+(p.teamId!==id ? ' · now '+(p.retired?'retired':p.teamId==null?'a free agent':tAbbr(p.teamId)) : ''), g ? '<span class="badge '+gradeClass(g)+'">'+g+'<\/span>' : '—'); });
+  // free agency and contracts
+  var signed = [], lost = [], kept = [], cut = [];
+  if(y!=null) S.players.forEach(function(p){
+    (p.tx||[]).forEach(function(x){
+      if(x.y!==y) return;
+      if(x.type==='Free agency' && x.txt.indexOf('signed with '+full)>=0 || x.type==='Free agency' && x.txt.indexOf('Signed with '+full)===0) signed.push(row(p, (/^Left (\w+)/.exec(x.txt) ? 'From '+/^Left (\w+)/.exec(x.txt)[1] : 'Free agent'), paren(x.txt)));
+      else if(x.type==='Free agency' && x.txt.indexOf('Left '+t.abbr+' ')===0){ var to = / signed with ([^(]+) \(/.exec(x.txt); lost.push(row(p, to ? 'To '+to[1] : 'Left', paren(x.txt))); }
+      else if(x.type==='Re-signed' && x.txt.indexOf('with '+t.abbr)>=0) kept.push(row(p, 'Re-signed', paren(x.txt)));
+      else if(x.type==='Released' && x.txt.indexOf(full)>=0) cut.push(row(p, x.txt.replace(/^Released by the [^—(]+/, '').replace(/^\s*[—-]\s*/,'') || 'Released', null));
+    });
+  });
+  // trades
+  var trs = (S.trades||[]).filter(function(tr){ return tr.y===y && (tr.a===id || tr.b===id); });
+  function side(g){ return (g.players||[]).map(function(pid){ var q = P(pid); return q ? pLink(q)+' <span class="muted small">'+q.pos+'<\/span>' : ''; }).concat((g.picks||[]).map(function(k){ return '<span class="small">'+k.y+' '+rdOrd(k.rd)+'-round pick<\/span>'; })).filter(Boolean).join(', ') || '<span class="muted">nothing<\/span>'; }
+  var trRows = trs.map(function(tr){
+    var mine = tr.a===id ? tr.aGets : tr.bGets, theirs = tr.a===id ? tr.bGets : tr.aGets, other = tr.a===id ? tr.b : tr.a;
+    return '<tr><td>'+(tr.note==='trade deadline' ? '<span class="badge gold">Deadline<\/span>' : tr.kind==='pick' ? '<span class="badge">Draft day<\/span>' : '<span class="badge">Offseason<\/span>')+'<\/td><td>'+tLink(other)+'<\/td><td><b>Got:<\/b> '+side(mine)+'<\/td><td><b>Gave:<\/b> '+side(theirs)+'<\/td><\/tr>';
+  });
+  h += '<p class="small muted" style="margin:10px 0 4px">'+(y!=null ? 'Moves made during and after the '+y+' season: the trade deadline, free agency, offseason trades and the '+draftY+' draft.' : 'The '+draftY+' draft.')+' "Now" is each player\'s current rating.<\/p>';
+  h += '<div class="mvgrid">';
+  h += table('🎓 '+draftY+' draft class', dr, 'Pick', 'Grade', 'No picks.').replace('<\/h4>', '<\/h4>'+draftNote);
+  h += table('✍️ Free-agent signings', signed, 'From', 'Contract', 'No outside free agents signed.');
+  h += '<div class="mvblock"><h4>🔁 Trades <span class="muted small">('+trRows.length+')<\/span><\/h4>'+(trRows.length ? '<table><tbody>'+trRows.join('')+'<\/tbody><\/table>' : '<div class="small muted">No trades.<\/div>')+'<\/div>';
+  h += table('🤝 Re-signed', kept, 'Move', 'Contract', 'Nobody re-signed.');
+  h += table('👋 Lost in free agency', lost, 'Went to', 'Contract', 'Nobody left in free agency.');
+  h += table('✂️ Released', cut, 'Why', null, 'Nobody released.');
+  return h + '<\/div>';
+}
 function teamTabs(id, tab){
-  return '<div class="viewtoggle" style="margin-top:12px">'+[['ov','🏈 Overview'],['hist','📜 Team history'],['hof','🏛️ Team Hall of Fame']].map(function(x){ return '<button data-teamtab="'+id+'|'+x[0]+'" class="'+(tab===x[0]?'on':'')+'">'+x[1]+'<\/button>'; }).join('')+'<\/div>';
+  return '<div class="viewtoggle" style="margin-top:12px">'+[['ov','🏈 Overview'],['moves','🔁 Moves & draft'],['hist','📜 Team history'],['hof','🏛️ Team Hall of Fame']].map(function(x){ return '<button data-teamtab="'+id+'|'+x[0]+'" class="'+(tab===x[0]?'on':'')+'">'+x[1]+'<\/button>'; }).join('')+'<\/div>';
 }
 function coachInYear(t, y){
   var c = (t.coachHist||[]).filter(function(h){ return h.from<=y && y<=h.to; })[0];
@@ -5250,6 +5684,8 @@ document.addEventListener('click', function(e){
   if(e.target.closest('[data-fan]')){ UI.stFilter.cat='fan'; }
   var gm = e.target.closest('[data-game]'); if(gm){ e.preventDefault(); var gy=+gm.getAttribute('data-game'); if(gm.hasAttribute('data-po')){ var pp=gm.getAttribute('data-po').split('-'); openGame(gy, null, null, null, {r:+pp[0], i:+pp[1]}); } else openGame(gy, +gm.getAttribute('data-wk'), +gm.getAttribute('data-h'), +gm.getAttribute('data-a')); return; }
   var ttb = e.target.closest('[data-teamtab]'); if(ttb){ var pr = ttb.getAttribute('data-teamtab').split('|'); openTeam(+pr[0], pr[1]); var mm = document.querySelector('.modal'); if(mm) mm.scrollTop = 0; return; }
+  var gly = e.target.closest('[data-glyear]'); if(gly){ var gp2 = gly.getAttribute('data-glyear').split('|'); UI.glY = UI.glY || {}; UI.glY[+gp2[0]] = +gp2[1]; var mm2 = document.querySelector('.modal'), st2 = mm2 ? mm2.scrollTop : 0; openPlayer(+gp2[0]); mm2 = document.querySelector('.modal'); if(mm2) mm2.scrollTop = st2; return; }
+  var tmv = e.target.closest('[data-tmoves]'); if(tmv){ var tp = tmv.getAttribute('data-tmoves').split('|'); UI.tmMovesY = +tp[1]; openTeam(+tp[0], 'moves'); return; }
   var fst = e.target.closest('[data-facestyle]'); if(fst){ setFaceStyle(fst.getAttribute('data-facestyle')); openPlayer(+fst.getAttribute('data-pid')); render(); return; }
   var wkw = e.target.closest('[data-wkweek]'); if(wkw){ UI.wkWeek = +wkw.getAttribute('data-wkweek'); render(); return; }
   var dv = e.target.closest('[data-dview]'); if(dv){ UI.dView = dv.getAttribute('data-dview'); render(); return; }
